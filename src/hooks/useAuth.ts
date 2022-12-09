@@ -5,8 +5,7 @@ import { AppDispatch } from '../store';
 export const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { isAuthenticated, user, loading, loaded, error } =
-    useSelector(selectAuthState);
+  const { isAuthenticated, user, loading, loaded, error } = useSelector(selectAuthState);
 
   const loginUser = (username: string, password: string) => {
     dispatch(login({ username, password }));

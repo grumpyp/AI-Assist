@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import {Link, Navigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Link, Navigate } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -12,28 +12,28 @@ import {
   InputLabel,
   Typography,
 } from '@material-ui/core';
-import {useAuth} from '../hooks';
+import { useAuth } from '../hooks';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  })
+);
 
 export function LoginPage() {
   const classes = useStyles();
-  const {
-    isAuthenticated, loginUser, loading, error,
-  } = useAuth();
+  const { isAuthenticated, loginUser, loading, error } = useAuth();
 
   const [formState, setFormState] = useState({
     username: '',
@@ -46,11 +46,11 @@ export function LoginPage() {
   });
 
   if (isAuthenticated) {
-    return <Navigate to="/jl"/>;
+    return <Navigate to="/jl" />;
   }
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
 
     setFormState((prevState) => ({
       ...prevState,
@@ -59,7 +59,7 @@ export function LoginPage() {
   };
 
   const validateForm = () => {
-    const errors = {username: '', password: ''};
+    const errors = { username: '', password: '' };
     let isValid = true;
 
     if (!formState.username) {
@@ -87,9 +87,9 @@ export function LoginPage() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline/>
+      <CssBaseline />
       <div className={classes.root}>
-        <img src="/logo.png" alt="Logo"/>
+        <img src="/logo.png" alt="Logo" />
 
         <Typography variant="h5" gutterBottom>
           Login
@@ -142,14 +142,10 @@ export function LoginPage() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/register">
-                Register
-              </Link>
+              <Link to="/register">Register</Link>
             </Grid>
             <Grid item>
-              <Link to="/forgot-password">
-                Forgot password?
-              </Link>
+              <Link to="/forgot-password">Forgot password?</Link>
             </Grid>
           </Grid>
         </form>

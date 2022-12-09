@@ -16,18 +16,12 @@ function WrappedApp() {
     <MuiThemeProvider theme={theme}>
       <Routes>
         <Route path="login" element={<LoginPage />} />
-        <Route
-          path="portfolio"
-          element={<PortfolioApp appPath="portfolio" />}
-        />
+        <Route path="portfolio" element={<PortfolioApp appPath="portfolio" />} />
 
         <Route
           path="jl"
           element={
-            <ProtectedRoute
-              isAuthenticated={isAuthenticated}
-              redirectTo="/login"
-            >
+            <ProtectedRoute isAuthenticated={isAuthenticated} redirectTo="/login">
               <NestedApp appPath="jl" />
             </ProtectedRoute>
           }

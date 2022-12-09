@@ -1,16 +1,14 @@
-import {createAsyncThunk, createSlice, PayloadAction, } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import {User} from '../../model';
-import {addLoadableCases, DEFAULT_LOADABLE, Loadable} from "../utils";
+import { User } from '../../model';
+import { addLoadableCases, DEFAULT_LOADABLE, Loadable } from '../utils';
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (
-    {username, password}: { username: string; password: string },
-  ) => {
-    const response = await axios.post('/api/login', {username, password});
+  async ({ username, password }: { username: string; password: string }) => {
+    const response = await axios.post('/api/login', { username, password });
     return response.data.user;
-  },
+  }
 );
 
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -46,8 +44,7 @@ const authSlice = createSlice({
       user: undefined,
     }));
     addLoadableCases(builder, logout);
-  }
+  },
 });
 
-export const {reducer, name} = authSlice;
-
+export const { reducer, name } = authSlice;

@@ -1,95 +1,95 @@
-import {createTheme} from "@material-ui/core/styles";
-import {useCallback, useMemo} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {selectDarkMode, toggleDarkMode} from '../store/site-settings';
+import { createTheme } from '@material-ui/core/styles';
+import { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDarkMode, toggleDarkMode } from '../store/site-settings';
 
 const lightTheme = createTheme({
   palette: {
     primary: {
-      main: "#2B4162",
-      light: "#667C8E",
-      dark: "#00203A",
-      contrastText: "#ffffff"
+      main: '#2B4162',
+      light: '#667C8E',
+      dark: '#00203A',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: "#FA9F42",
-      light: "#FFCB7F",
-      dark: "#C57D11",
-      contrastText: "#000000"
+      main: '#FA9F42',
+      light: '#FFCB7F',
+      dark: '#C57D11',
+      contrastText: '#000000',
     },
     error: {
-      main: "#d32f2f",
-      light: "#ef9a9a",
-      dark: "#b71c1c",
-      contrastText: "#ffffff"
+      main: '#d32f2f',
+      light: '#ef9a9a',
+      dark: '#b71c1c',
+      contrastText: '#ffffff',
     },
     warning: {
-      main: "#ffc107",
-      light: "#fff59d",
-      dark: "#c79100",
-      contrastText: "#000000"
+      main: '#ffc107',
+      light: '#fff59d',
+      dark: '#c79100',
+      contrastText: '#000000',
     },
     info: {
-      main: "#26c6da",
-      light: "#b2ebf2",
-      dark: "#0097a7",
-      contrastText: "#ffffff"
+      main: '#26c6da',
+      light: '#b2ebf2',
+      dark: '#0097a7',
+      contrastText: '#ffffff',
     },
     success: {
-      main: "#4caf50",
-      light: "#a5d6a7",
-      dark: "#1b5e20",
-      contrastText: "#ffffff"
-    }
+      main: '#4caf50',
+      light: '#a5d6a7',
+      dark: '#1b5e20',
+      contrastText: '#ffffff',
+    },
   },
   typography: {
-    fontFamily: "Roboto, sans-serif",
-  }
+    fontFamily: 'Roboto, sans-serif',
+  },
 });
 
 const darkTheme = createTheme({
   palette: {
-    type: "dark",
+    type: 'dark',
     primary: {
-      main: "#667C8E",
-      light: "#2B4162",
-      dark: "#00203A",
-      contrastText: "#ffffff"
+      main: '#667C8E',
+      light: '#2B4162',
+      dark: '#00203A',
+      contrastText: '#ffffff',
     },
     secondary: {
-      main: "#FFCB7F",
-      light: "#FA9F42",
-      dark: "#C57D11",
-      contrastText: "#000000"
+      main: '#FFCB7F',
+      light: '#FA9F42',
+      dark: '#C57D11',
+      contrastText: '#000000',
     },
     error: {
-      main: "#ef9a9a",
-      light: "#d32f2f",
-      dark: "#b71c1c",
-      contrastText: "#ffffff"
+      main: '#ef9a9a',
+      light: '#d32f2f',
+      dark: '#b71c1c',
+      contrastText: '#ffffff',
     },
     warning: {
-      main: "#fff59d",
-      light: "#ffc107",
-      dark: "#c79100",
-      contrastText: "#000000"
+      main: '#fff59d',
+      light: '#ffc107',
+      dark: '#c79100',
+      contrastText: '#000000',
     },
     info: {
-      main: "#b2ebf2",
-      light: "#26c6da",
-      dark: "#0097a7",
-      contrastText: "#ffffff"
+      main: '#b2ebf2',
+      light: '#26c6da',
+      dark: '#0097a7',
+      contrastText: '#ffffff',
     },
     success: {
-      main: "#a5d6a7",
-      light: "#4caf50",
-      dark: "#1b5e20",
-      contrastText: "#ffffff"
-    }
+      main: '#a5d6a7',
+      light: '#4caf50',
+      dark: '#1b5e20',
+      contrastText: '#ffffff',
+    },
   },
   typography: {
-    fontFamily: "Roboto, sans-serif",
-  }
+    fontFamily: 'Roboto, sans-serif',
+  },
 });
 
 export const useLocalTheme = () => {
@@ -109,8 +109,8 @@ export const useLocalTheme = () => {
         dispatch(toggleDarkMode());
       }
     },
-    [isDarkMode, dispatch],
+    [isDarkMode, dispatch]
   );
 
-  return {theme: currentTheme, darkMode: isDarkMode, setDarkMode};
-}
+  return { theme: currentTheme, darkMode: isDarkMode, setDarkMode };
+};
