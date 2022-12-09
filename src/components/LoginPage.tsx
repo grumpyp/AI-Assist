@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
-import {useAuth} from '../hooks';
 import {Link, Navigate} from 'react-router-dom';
 import {
   Button,
@@ -13,27 +12,28 @@ import {
   InputLabel,
   Typography,
 } from '@material-ui/core';
+import {useAuth} from '../hooks';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }),
-);
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
-export const LoginPage: React.FC = () => {
+export function LoginPage() {
   const classes = useStyles();
-  const {isAuthenticated, loginUser, loading, error} = useAuth();
+  const {
+    isAuthenticated, loginUser, loading, error,
+  } = useAuth();
 
   const [formState, setFormState] = useState({
     username: '',
@@ -59,7 +59,7 @@ export const LoginPage: React.FC = () => {
   };
 
   const validateForm = () => {
-    let errors = {username: '', password: ''};
+    const errors = {username: '', password: ''};
     let isValid = true;
 
     if (!formState.username) {
@@ -156,4 +156,4 @@ export const LoginPage: React.FC = () => {
       </div>
     </Container>
   );
-};
+}
