@@ -1,0 +1,24 @@
+import React, {useCallback} from 'react';
+import {Route, Routes} from 'react-router-dom';
+import {createTheme, MuiThemeProvider} from '@material-ui/core/styles';
+
+const theme = createTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
+
+export const PortfolioApp: React.FC<{ appPath: string }> = ({appPath}) => {
+  const getPath = useCallback((path: string) => `${appPath}/${path}`, [appPath]);
+
+  return (
+    <MuiThemeProvider theme={theme}>
+      <Routes>
+        <Route path={getPath('')}>
+          "Hello"
+        </Route>
+      </Routes>
+    </MuiThemeProvider>
+  );
+};
