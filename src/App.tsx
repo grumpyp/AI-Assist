@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route, Routes,} from 'react-router-dom';
+import {PortfolioApp} from './containers/portfolio';
+import {LoginPage, ProtectedRoute} from "./components";
+import {Provider} from "react-redux";
+import { store} from './store';
+import {useAuth} from "./hooks";
+import {NestedApp} from "./containers/app";
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <BrowserRouter>
+        <WrappedApp/>
+      </BrowserRouter>
+    </Provider>
+  )
 }
 
-export default App;
+export const WrappedApp: React.FC = () => {
+  const {isAuthenticated} = useAuth();
+
+  return (
+    <Routes>
+      <Route path="login" element={<LoginPage/>}/>
+      <Route path={"portfolio"} element={<PortfolioApp appPath={"portfolio"}/>}>
+      </Route>
+
+      <Route path={"jl"} element={<ProtectedRoute isAuthenticated={isAuthenticated} redirectTo={"/login"}>
+        <NestedApp appPath={"jl"}/>
+      </ProtectedRoute>}>
+
+      </Route>
+    </Routes>
+  );
+};
