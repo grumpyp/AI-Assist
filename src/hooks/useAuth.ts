@@ -1,22 +1,20 @@
-import {useDispatch, useSelector} from 'react-redux';
-import {AuthState, login, logout} from '../store/auth';
-import {AppDispatch} from "../store";
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout, selectAuthState } from '../store/auth';
+import { AppDispatch } from '../store';
 
 export const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const {isAuthenticated, user, loading, loaded, error} = useSelector(
-    (state: { auth: AuthState }) => state.auth
-  );
+  const { isAuthenticated, user, loading, loaded, error } =
+    useSelector(selectAuthState);
 
   const loginUser = (username: string, password: string) => {
-    dispatch(login(username, password))
-  }
+    dispatch(login({ username, password }));
+  };
+
   const logoutUser = () => {
-    dispatch(
-      logout()
-    )
-  }
+    dispatch(logout());
+  };
 
   return {
     isAuthenticated,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navigate} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export type ProtectedRouteProps = {
   isAuthenticated: boolean;
@@ -7,10 +7,10 @@ export type ProtectedRouteProps = {
   children: React.ReactNode;
 };
 
-export const ProtectedRoute = ({isAuthenticated, redirectTo, children}: ProtectedRouteProps)  => {
+export function ProtectedRoute({ isAuthenticated, redirectTo, children }: ProtectedRouteProps) {
   if (isAuthenticated) {
-    return <React.Fragment>{children}</React.Fragment>;
-  } else {
-    return <Navigate to={{pathname: redirectTo}}/>;
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return <>{children}</>;
   }
-};
+  return <Navigate to={{ pathname: redirectTo }} />;
+}

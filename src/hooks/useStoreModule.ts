@@ -1,41 +1,28 @@
-import {useEffect} from "react";
+import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {Store} from "redux";
-import {AppDispatch} from "../store";
-import {registerModule, RegisterModuleAction, unregisterModule, UnregisterModuleAction} from "../store/dynamic-modules";
-
-function createStoreModule(moduleName: string, store: Store) {
-  return {
-    register: () => (dispatch: (action: RegisterModuleAction) => void) => {
-      dispatch(registerModule(moduleName, store));
-    },
-    unregister: () => (dispatch: (action: UnregisterModuleAction) => void) => {
-      dispatch(unregisterModule(moduleName));
-    },
-  };
-}
-
+import {Store} from 'redux';
+import {AppDispatch} from '../store';
+import {registerModule, unregisterModule,} from '../store/dynamic-modules';
 
 export const useStoreModule = ({
                                  moduleName,
                                  store,
                                  shouldUnregisterOnUnmount = true,
                                }: {
-                                 moduleName: string,
-                                 store: Store,
-                                 shouldUnregisterOnUnmount: boolean,
-                               }
-) => {
+  moduleName: string,
+  store: Store,
+  shouldUnregisterOnUnmount: boolean,
+}) => {
   const dispatch = useDispatch<AppDispatch>();
-  const storeModule = createStoreModule(moduleName, store);
 
   useEffect(() => {
-    dispatch(storeModule.register());
+    dispatch(registerModule({id: moduleName, store}));
 
     return () => {
       if (shouldUnregisterOnUnmount) {
-        dispatch(storeModule.unregister());
+        dispatch(unregisterModule({id: moduleName}));
       }
     };
-  }, [dispatch, shouldUnregisterOnUnmount, storeModule]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };

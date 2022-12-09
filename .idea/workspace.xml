@@ -5,11 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1582b4de-403d-4c71-ac5a-d03eb85393cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/JPASupport-project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useTheme.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/auth/selectors.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/auth/slice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/site-settings/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProtectedRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/app/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/app/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/app/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/portfolio/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/portfolio/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useAuth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useStoreModule.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useStoreModule.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reportWebVitals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/auth/actions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/auth/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/auth/reducers.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/dynamic-modules/actions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/dynamic-modules/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dynamic-modules/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/dynamic-modules/reducers.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +67,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.linters.configure.manually.selectedeslint" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="" />
+    <property name="node.js.selected.package.eslint" value="$PROJECT_DIR$/node_modules/eslint" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -93,7 +121,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1670551213122</updated>
-      <workItem from="1670551218764" duration="20661000" />
+      <workItem from="1670551218764" duration="31017000" />
     </task>
     <servers />
   </component>

@@ -1,11 +1,10 @@
-import {Action, Reducer} from "@reduxjs/toolkit";
+import {Action, ActionReducerMapBuilder, AsyncThunk, Reducer, SerializedError} from '@reduxjs/toolkit';
 
 export interface Loadable {
   loading: boolean;
   loaded: boolean;
-  error?: Error;
+  error?: SerializedError;
 }
-
 
 export const DEFAULT_LOADABLE: Loadable = {
   loading: false,
@@ -13,34 +12,27 @@ export const DEFAULT_LOADABLE: Loadable = {
   error: undefined,
 };
 
-export const handleLoadable = <S extends Loadable, T extends Action & { error?: Error }>(
-  reducer: Reducer<S, T>,
-  successType: string,
-  failureType: string
-) => (state: S | undefined, action: T): S => {
-  const newState: S = reducer(state, action);
+export function addLoadableCases<S extends Loadable>(
+  builder: ActionReducerMapBuilder<S>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  thunk: AsyncThunk<any,any,any>,
+) {
+  builder.addCase(thunk.pending, (state) => ({
+    ...state,
+    loading: true,
+  }));
 
-  switch (action.type) {
-    case successType:
-      return {
-        ...newState,
-        loading: false,
-        loaded: true,
-        error: null,
-      };
-    case failureType:
-      return {
-        ...newState,
-        loading: false,
-        loaded: false,
-        error: action.error,
-      };
-    default:
-      return {
-        ...newState,
-        loading: true,
-        loaded: false,
-        error: null,
-      };
-  }
-};
+  builder.addCase(thunk.pending, (state) => ({
+    ...state,
+    loading: false,
+    loaded: true,
+    error: undefined,
+  }));
+
+  builder.addCase(thunk.rejected, (state, action) => ({
+    ...state,
+    error: action.error,
+    loading: false,
+    loaded: false,
+  }));
+}
