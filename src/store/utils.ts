@@ -1,4 +1,4 @@
-import {Action, ActionReducerMapBuilder, AsyncThunk, Reducer, SerializedError} from '@reduxjs/toolkit';
+import { ActionReducerMapBuilder, AsyncThunk, SerializedError } from '@reduxjs/toolkit';
 
 export interface Loadable {
   loading: boolean;
@@ -15,7 +15,7 @@ export const DEFAULT_LOADABLE: Loadable = {
 export function addLoadableCases<S extends Loadable>(
   builder: ActionReducerMapBuilder<S>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  thunk: AsyncThunk<any,any,any>,
+  thunk: AsyncThunk<any, any, any>
 ) {
   builder.addCase(thunk.pending, (state) => ({
     ...state,

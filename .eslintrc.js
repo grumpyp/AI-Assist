@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    browser: true,
+  },
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',

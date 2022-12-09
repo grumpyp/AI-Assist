@@ -14,9 +14,7 @@ export function PortfolioApp({ appPath }: { appPath: string }) {
   return (
     <MuiThemeProvider theme={theme}>
       <Routes>
-        <Route path={getPath('')}>
-          Hello
-        </Route>
+        <Route path={getPath('')}>Hello</Route>
       </Routes>
     </MuiThemeProvider>
   );
