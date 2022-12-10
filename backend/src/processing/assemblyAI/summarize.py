@@ -6,6 +6,7 @@ import re
 import uuid
 import random
 from processing.cohere.faqrouter import faq_matcher
+from database.models.faq import Faq
 
 
 _SENTIMENT = {"NEGATIVE": -2.0,
@@ -78,7 +79,7 @@ class AssemblyAI:
         highlights = [highlight["text"] for highlight in data["auto_highlights_result"]["results"]]
         sentiment = AssemblyAI.calculate_sentiment(data=data)
         call_back_wished = random.randint(0, 1)
-        faq_match = faq_matcher(data["summary"])
+        faq_match = faq_matcher(data["summary"])[0].prediction
         findings = {"userid": re.search(r"(\d{6,})", digit_cleaner).group(1),
                     "summary": data["summary"],
                     "name": person_name,
@@ -88,7 +89,7 @@ class AssemblyAI:
                     "audio_duration": data["audio_duration"],
                     "sentiment": sentiment,
                     "call_id": call_id,
-                    # "faqs": Faq.query.filter(Faq.buzzword == faq.).all(),
+                    "faqs": Faq.query.filter(Faq.buzzword == faq_match).all(),
                     "callback_requested": True if call_back_wished == 1 else False}
         return findings
 

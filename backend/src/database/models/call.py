@@ -24,6 +24,7 @@ class Call(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
     faqs = db.relationship("Faq", lazy=True)
+    #TODO: add to_dict to all other models e.g. Problems, Faqs,..
     def to_dict(self):
         call_dict = {}
         for attr in self.__dict__:
