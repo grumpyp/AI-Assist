@@ -1,7 +1,6 @@
 from flask import Flask
 
 from database.db import db, after_db_init
-from test import insert_dummy_values
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://///tmp/test.db'
@@ -19,10 +18,10 @@ def run_app():
 
         app.app_context().push()
 
-        # create tables only once
+        # Create Database tables in the right order.
         db.create_all()
         db.session.commit()
-        insert_dummy_values()
+        after_db_init()
         app.run(host='0.0.0.0', port=4999, debug=True, use_reloader=False)
 
 
