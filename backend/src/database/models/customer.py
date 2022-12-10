@@ -11,7 +11,7 @@ class Customer(db.Model):
     account_number = db.Column(db.String(255))
     preferences = db.Column(db.JSON)
     location = db.Column(db.String(255))
-    calls = db.relationship("Call", lazy=True)
+    calls = db.relationship("Call", back_populates="customer", lazy=True)
     satisfaction_rating = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)

@@ -27,7 +27,7 @@ class Employee(db.Model):
     description = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
-    calls = db.relationship("Call", secondary=employee_call)
+    calls = db.relationship("Call", secondary=employee_call, back_populates="employees", lazy=True)
     teams = db.relationship("Team", secondary=employee_team)
     queueing_theory_best_match = db.relationship("QueueingTheoryBestMatch",
                                                  secondary=employee_queueing_theory_best_match)

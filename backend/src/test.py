@@ -5,7 +5,7 @@ from database.models.customer import Customer
 from database.models.employees.leader import Leader, LeaderPerformanceMetrics
 from database.models.employees.manager import Manager, ManagerPerformanceMetrics
 from database.models.employees.team import Team, TeamPerformanceMetrics
-from database.models.employees.worker import Worker, WorkerPerformanceMetrics
+from database.models.employees.worker import Worker
 from database.models.queueing_theory_model import QueueingTheoryModel, QueueingTheoryBestMatch
 
 

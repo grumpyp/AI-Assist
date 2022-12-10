@@ -15,7 +15,7 @@ class Worker(Employee):
 class WorkerPerformanceMetrics(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
     employee_id = db.Column(db.String(36), db.ForeignKey("employee.id"))
-    employee = db.relationship("Employee")
+    employee = db.relationship("Employee", back_populates="performance_metrics", lazy=True)
     calls_handled = db.Column(db.Integer)
     average_call_length = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
