@@ -25,7 +25,7 @@ def upload_file(filepath):
     file_to_upload = filepath
     filename = file_to_upload.split("/")[-1]
 
-    file_path = f"https://content-baer.de/hackathon/{filename}"
+    file_path = f"https://hackathon.content-baer.de/{filename}"
 
     # Open the file to be uploaded
     with open(file_to_upload, "rb") as f:
