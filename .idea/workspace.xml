@@ -5,28 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1582b4de-403d-4c71-ac5a-d03eb85393cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/app/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/app/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/app/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/app/store/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/portfolio/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/portfolio/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useAuth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useStoreModule.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useStoreModule.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useTheme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useTheme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reportWebVitals.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/setupTests.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/selectors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/auth/slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/auth/slice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dynamic-modules/selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dynamic-modules/selectors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/dynamic-modules/slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/dynamic-modules/slice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/site-settings/selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/site-settings/selectors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/site-settings/slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/site-settings/slice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +93,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1670551213122</updated>
-      <workItem from="1670551218764" duration="31679000" />
+      <workItem from="1670551218764" duration="33658000" />
     </task>
     <servers />
   </component>
