@@ -15,7 +15,7 @@ class Call(db.Model):
     employees = db.relationship("Employee", secondary=employee_call, viewonly=True)
     call_analysis = db.relationship("CallAnalysis", lazy=True, viewonly=True, uselist=False)
     language = db.Column(db.String(255))
-    feedback = db.Column(db.Text)
+    feedback = db.Column(db.Text, nullable=True)
     callback_requested = db.Column(db.Boolean)
     transfer_requested = db.Column(db.Boolean)
     voicemail_left = db.Column(db.Boolean)
@@ -38,10 +38,10 @@ class Solution(db.Model):
 class Problem(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     call_id = db.Column(db.String(36), db.ForeignKey("call.id"), nullable=True)
-    type = db.Column(db.String(255))
+    type = db.Column(db.String(255), nullable=True)
     long_description = db.Column(db.String(255))
     summary = db.Column(db.String(255))
-    category = db.Column(db.String(255))
+    category = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
