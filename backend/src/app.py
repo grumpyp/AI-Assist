@@ -24,6 +24,7 @@ def run_app():
         db.session.commit()
         after_db_init()
         insert_sample_data()
+
         app.run(host='0.0.0.0', port=4999, debug=True, use_reloader=False)
 
 

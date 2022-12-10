@@ -13,9 +13,9 @@ class Leader(Employee):
 
 
 class LeaderPerformanceMetrics(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     leader_id = db.Column(db.String(36), db.ForeignKey("employee.id"))
-    leader = db.relationship("Leader", lazy=True)
+    leader = db.relationship("Leader", lazy=True, viewonly=True)
     ## TODO: Leader performance metrics.
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
