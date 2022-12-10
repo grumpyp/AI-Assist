@@ -30,6 +30,7 @@ def insert_dummy_values():
         summary="Router neu starten",
         problem=problem
     )
+    db.session.add(solution)
 
     call = Call(customer=customer, problem_id=uuid.uuid4(), recording_id=uuid.uuid4(), language="de", feedback="", callback_requested=False, transfer_requested=False, voicemail_left=False, transcript_requested=False, status="completed")
     db.session.add(call)
