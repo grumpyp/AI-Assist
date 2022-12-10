@@ -1,5 +1,4 @@
-import ftplib
-from backend.src.processing.assemblyAI.config import FTP_HOST, FTP_USER, FTP_PASSWORD
+from processing.config import FTP_HOST, FTP_USER, FTP_PASSWORD
 
 
 def upload_file(filepath):
