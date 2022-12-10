@@ -1,25 +1,24 @@
 import uuid
-from database.db import db
 from datetime import datetime
-from database.models.users.user import Base
+
+from database.db import db
+from database.models.employees.employee import employee_team
 
 
-class Team(Base):
-    __tablename__ = "team"
+class Team(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
     name = db.Column(db.String(255))
-    manager_id = db.Column(db.String(36), db.ForeignKey("manager.id"))
-    manager = db.relationship("Manager", backref=db.backref("teams", lazy=True))
-    employees = db.relationship("Employee", backref=db.backref("team", lazy=True))
-    performance_metrics = db.relationship("TeamPerformanceMetrics", backref="team")
+    managers = db.relationship("Manager", secondary=employee_team, lazy=True)
+    employees = db.relationship("Employee", secondary=employee_team, lazy=True)
+    performance_metrics = db.relationship("TeamPerformanceMetrics")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-class TeamPerformanceMetrics(Base):
-    __tablename__ = "team_performance_metrics"
+class TeamPerformanceMetrics(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
     team_id = db.Column(db.String(36), db.ForeignKey("team.id"))
+    team = db.relationship("Team", lazy=True)
     average_call_length = db.Column(db.Integer)
     call_workload = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

@@ -1,14 +1,14 @@
 from database.db import db
 import uuid
-from database.models.call.call import Call
-from database.models.call.problem import Problem
-from database.models.call.recording import Recording
-from database.models.call.solution import Solution
+from database.models.call import Call, Problem, Solution
 from database.models.call_analysis import CallAnalysis
 from database.models.customer import Customer
 from database.models.queueing_theory_model import QueueingTheoryModel, QueueingTheoryBestMatch
-from database.models.users.team import Team, TeamPerformanceMetrics
-from database.models.users.user import Employee, Manager, Leader, User, EmployeePerformanceMetrics
+from database.models.employees.team import Team, TeamPerformanceMetrics
+from database.models.employees.employee import Employee
+from database.models.employees.leader import Leader,LeaderPerformanceMetrics
+from database.models.employees.manager import Manager,ManagerPerformanceMetrics
+from database.models.employees.worker import Worker,WorkerPerformanceMetrics
 
 
 def insert_dummy_values():
@@ -55,7 +55,7 @@ def insert_dummy_values():
     employee = Employee(name="Peter Parker", contact_info="peter.parker@gmail.com", role="employee", profile_picture=None, description="", team=team)
     db.session.add(employee)
 
-    employee_performance_metrics = EmployeePerformanceMetrics(employee=employee, average_call_length=120, call_workload=5)
+    employee_performance_metrics = WorkerPerformanceMetrics(employee=employee, average_call_length=120, call_workload=5)
     db.session.add(employee_performance_metrics)
 
     db.session.commit()

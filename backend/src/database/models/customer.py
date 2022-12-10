@@ -1,13 +1,10 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy.orm import declared_attr
-
 from database.db import db
-from database.models.users.user import Base
 
 
-class Customer(Base):
+class Customer(db.Model):
     __tablename__ = "customer"
     id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
     name = db.Column(db.String(255))
@@ -15,7 +12,7 @@ class Customer(Base):
     account_number = db.Column(db.String(255))
     preferences = db.Column(db.JSON)
     location = db.Column(db.String(255))
-    calls = db.relationship("Call", backref="customer")
+    calls = db.relationship("Call", lazy=True)
     satisfaction_rating = db.Column(db.Integer)
     previous_solutions = db.Column(db.JSON)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
