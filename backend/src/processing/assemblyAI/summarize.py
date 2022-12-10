@@ -3,64 +3,85 @@ import requests
 from backend.src.processing.assemblyAI.config import API_KEY
 import time
 import re
+import enum
 
 
-# TODO: Implement file upload to use API
-def summarize(audio_file: str = None):
-    """
-    The function will queue our request to the API and return the response once it's completed.
+_SENTIMENT = {"NEGATIVE": -2.0,
+              "NEUTRAL": 1.0,
+              "POSITIVE": 2.0}
 
-    Use AssemblyAI to summarize audio file
-    :param audio_file: URL to audio file
-    :return: Summary of audio file
-    """
-    print(API_KEY)
-    endpoint = "https://api.assemblyai.com/v2/transcript"
-    json = {
-        "audio_url": audio_file,
-        "summarization": True,
-        "summary_model": "informative",
-        "summary_type": "bullets",
-        "sentiment_analysis": True,
-        "entity_detection": True,
-        "iab_categories": True,
-        "auto_highlights": True,
-    }
-    headers = {
-        "authorization": API_KEY,
-        "content-type": "application/json"
-    }
-    response = requests.post(endpoint, json=json, headers=headers)
+class AssemblyAI:
+    @staticmethod
+    def summarize(audio_file: str = None):
+        """
+        The function will queue our request to the API and return the response once it's completed.
 
-    try:
-        task_id = response.json()["id"]
-    except Exception as e:
-        return {"error": e}
-
-    while True:
-        time.sleep(5)
-        endpoint = f"https://api.assemblyai.com/v2/transcript/{task_id}"
-        headers = {
-            "authorization": API_KEY
+        Use AssemblyAI to summarize audio file
+        :param audio_file: URL to audio file
+        :return: Summary of audio file
+        """
+        print(API_KEY)
+        endpoint = "https://api.assemblyai.com/v2/transcript"
+        json = {
+            "audio_url": audio_file,
+            "summarization": True,
+            "summary_model": "informative",
+            "summary_type": "bullets",
+            "sentiment_analysis": True,
+            "entity_detection": True,
+            "iab_categories": True,
+            "auto_highlights": True,
         }
-        response = requests.get(endpoint, headers=headers)
-        print(response.json())
-        if response.json()["status"] == "completed":
-            return response.json()
+        headers = {
+            "authorization": API_KEY,
+            "content-type": "application/json"
+        }
+        response = requests.post(endpoint, json=json, headers=headers)
 
+        try:
+            task_id = response.json()["id"]
+        except Exception as e:
+            return {"error": e}
 
-def serialize_summary(data: dict):
-    digit_cleaner = re.sub(r'(\d)-(\d)', r'\1\2', data["text"])
-    person_name = data.get("entities", {})[0].get("text") \
-        if data.get("entities", {})[0].get("entity_type", None) == "person_name" else "Couldn't find name"
-    highlights = [highlight["text"] for highlight in data["auto_highlights_result"]["results"]]
+        while True:
+            time.sleep(5)
+            endpoint = f"https://api.assemblyai.com/v2/transcript/{task_id}"
+            headers = {
+                "authorization": API_KEY
+            }
+            response = requests.get(endpoint, headers=headers)
+            print(response.json())
+            if response.json()["status"] == "completed":
+                return response.json()
 
-    findings = {"userid": re.search(r"(\d{6,})", digit_cleaner).group(1),
-                "summary": data["summary"],
-                "name": person_name,
-                "text": data["text"],
-                "highlights": highlights,}
-    return findings
+    @staticmethod
+    def calculate_sentiment(**data: dict):
+        """
+        We use a custom formular where we use the confidence of the model multiplied with 1 for NEUTRAL,
+        2 for POSITIVE and -2 for NEGATIVE
+        :param data: sentiment_analysis_results from AssemblyAI
+        :return: general sentiment of the audio file
+        """
+        sentiment = [(_SENTIMENT[sentiment.get("sentiment")] * float(sentiment.get("confidence"))) for sentiment
+                     in data.get("data").get("sentiment_analysis_results")]
+        calculated = sum(sentiment) / len(sentiment)
+        return calculated
+
+    @staticmethod
+    def serialize_summary(data: dict):
+        digit_cleaner = re.sub(r'(\d)-(\d)', r'\1\2', data["text"])
+        person_name = data.get("entities", {})[0].get("text") \
+            if data.get("entities", {})[0].get("entity_type", None) == "person_name" else "Couldn't find name"
+        highlights = [highlight["text"] for highlight in data["auto_highlights_result"]["results"]]
+
+        findings = {"userid": re.search(r"(\d{6,})", digit_cleaner).group(1),
+                    "summary": data["summary"],
+                    "name": person_name,
+                    "text": data["text"],
+                    "highlights": highlights,
+                    "language_code": data["language_code"],
+                    "audio_duration": data["audio_duration"],}
+        return findings
 
 
 # Answer
