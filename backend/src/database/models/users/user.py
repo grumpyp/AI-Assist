@@ -1,7 +1,7 @@
 import uuid
 from abc import ABC, abstractmethod
 from datetime import datetime
-from models import db
+from database.db import db
 
 
 class User(db.Model, ABC):

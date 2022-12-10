@@ -1,5 +1,5 @@
 import uuid
-from database.db import db
+from backend.src.database.db import db
 from datetime import datetime
 
 

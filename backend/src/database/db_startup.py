@@ -1,7 +1,7 @@
 import inspect
 
 from db import db
-import models as models
+
 
 def init_db():
     db.create_all()
