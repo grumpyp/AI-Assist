@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from models import db
+from database.db import db
 
 from backend.src.database.eventlisteners.common_eventlisteners import auto_update_at
 

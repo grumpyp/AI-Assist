@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from models import db
+from database.db import db
 
 
 class Recording(db.Model):
