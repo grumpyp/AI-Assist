@@ -13,6 +13,7 @@ class Call(Base):
     problem = db.relationship("Problem", backref=db.backref("calls", lazy=True))
     recording_id = db.Column(db.String(36), db.ForeignKey("recording.id"))
     recording = db.relationship("Recording", backref=db.backref("calls", lazy=True))
+    employees = db.relationship("User", backref="calls")
     language = db.Column(db.String(255))
     feedback = db.Column(db.Text)
     callback_requested = db.Column(db.Boolean)

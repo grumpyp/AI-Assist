@@ -1,5 +1,5 @@
 import uuid
-from backend.src.database.db import db
+from database.db import db
 from datetime import datetime
 from database.models.users.user import Base
 
@@ -14,7 +14,8 @@ class QueueingTheoryModel(Base):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-class QueueingTheoryBestMatch(db.Model):
+class QueueingTheoryBestMatch(Base):
+    __tablename__ = "queueing_theory_model_best_matches"
     id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
     queueing_theory_model_id = db.Column(db.String(36), db.ForeignKey("queueing_theory_model.id"))
     number_of_employees = db.Column(db.Integer)
