@@ -23,7 +23,7 @@ class Call(db.Model):
     status = db.Column(db.Enum("in progress", "answered", "completed"))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
-
+    faqs = db.relationship("Faq", lazy=True)
     def to_dict(self):
         call_dict = {}
         for attr in self.__dict__:
