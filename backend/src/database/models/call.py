@@ -6,14 +6,14 @@ from database.models.employees.employee import employee_call
 
 
 class Call(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     customer_id = db.Column(db.String(36), db.ForeignKey("customer.id"))
-    customer = db.relationship("Customer", lazy=True)
-    problem = db.relationship("Problem", lazy=True)
+    customer = db.relationship("Customer", lazy=True, viewonly=True)
+    problems = db.relationship("Problem", lazy=True)
     solutions = db.relationship("Solution", lazy=True)
     recordings = db.relationship("Recording", lazy=True)
-    employees = db.relationship("Employee", secondary=employee_call)
-    call_analysis = db.relationship("CallAnalysis", lazy=True)
+    employees = db.relationship("Employee", secondary=employee_call, viewonly=True)
+    call_analysis = db.relationship("CallAnalysis", lazy=True, viewonly=True, uselist=False)
     language = db.Column(db.String(255))
     feedback = db.Column(db.Text)
     callback_requested = db.Column(db.Boolean)
@@ -26,8 +26,8 @@ class Call(db.Model):
 
 
 class Solution(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
-    call_id = db.Column(db.String(36), db.ForeignKey("call.id"))
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    call_id = db.Column(db.String(36), db.ForeignKey("call.id"), nullable=True)
     description = db.Column(db.Text)
     summary = db.Column(db.Text)
     type = db.Column(db.String(255))
@@ -36,8 +36,8 @@ class Solution(db.Model):
 
 
 class Problem(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
-    call_id = db.Column(db.String(36), db.ForeignKey("call.id"))
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    call_id = db.Column(db.String(36), db.ForeignKey("call.id"), nullable=True)
     type = db.Column(db.String(255))
     long_description = db.Column(db.String(255))
     summary = db.Column(db.String(255))
@@ -47,8 +47,8 @@ class Problem(db.Model):
 
 
 class Recording(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
-    call_id = db.Column(db.String(36), db.ForeignKey("call.id"))
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    call_id = db.Column(db.String(36), db.ForeignKey("call.id"), nullable=True)
     duration = db.Column(db.Integer)
     recording = db.Column(db.LargeBinary)
     transcription = db.Column(db.Text)
