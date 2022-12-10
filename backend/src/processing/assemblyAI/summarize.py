@@ -3,7 +3,8 @@ import requests
 from backend.src.processing.assemblyAI.config import API_KEY
 import time
 import re
-import enum
+import uuid
+import random
 
 
 _SENTIMENT = {"NEGATIVE": -2.0,
@@ -69,18 +70,23 @@ class AssemblyAI:
 
     @staticmethod
     def serialize_summary(data: dict):
+        call_id = str(uuid.uuid4())
         digit_cleaner = re.sub(r'(\d)-(\d)', r'\1\2', data["text"])
         person_name = data.get("entities", {})[0].get("text") \
             if data.get("entities", {})[0].get("entity_type", None) == "person_name" else "Couldn't find name"
         highlights = [highlight["text"] for highlight in data["auto_highlights_result"]["results"]]
-
+        sentiment = AssemblyAI.calculate_sentiment(data=data)
+        call_back_wished = random.randint(0, 1)
         findings = {"userid": re.search(r"(\d{6,})", digit_cleaner).group(1),
                     "summary": data["summary"],
                     "name": person_name,
                     "text": data["text"],
                     "highlights": highlights,
                     "language_code": data["language_code"],
-                    "audio_duration": data["audio_duration"],}
+                    "audio_duration": data["audio_duration"],
+                    "sentiment": sentiment,
+                    "call_id": call_id,
+                    "callback_requested": True if call_back_wished == 1 else False}
         return findings
 
 
