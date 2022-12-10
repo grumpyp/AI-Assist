@@ -1,7 +1,7 @@
 from flask import Flask
 
 from database.db import db, after_db_init
-from test import insert_dummy_values
+from test import insert_sample_data
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -23,7 +23,7 @@ def run_app():
         db.create_all()
         db.session.commit()
         after_db_init()
-        insert_dummy_values()
+        insert_sample_data()
         app.run(host='0.0.0.0', port=4999, debug=True, use_reloader=False)
 
 
