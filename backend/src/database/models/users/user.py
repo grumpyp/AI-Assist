@@ -1,13 +1,19 @@
 import uuid
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from datetime import datetime
+
+from sqlalchemy.orm import declarative_base
+
 from database.db import db
 
+# declarative base class
+Base = declarative_base()
 
-class User(db.Model, ABC):
+
+class User(Base):
     __abstract__ = True
 
-    id = db.Column(db.UUID, primary_key=True, default=uuid.uuid4)
+    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
     name = db.Column(db.String(255))
     contact_info = db.Column(db.String(255))
     role = db.Column(db.Enum("employee", "manager", "leader"))
@@ -22,8 +28,9 @@ class User(db.Model, ABC):
 
 
 class Employee(User):
-    id = db.Column(db.UUID, db.ForeignKey("user.id"), primary_key=True)
-    team_id = db.Column(db.UUID, db.ForeignKey("team.id"))
+    __tablename__ = "employee"
+    id = db.Column(db.String(36), db.ForeignKey("user.id"), primary_key=True)
+    team_id = db.Column(db.String(36), db.ForeignKey("team.id"))
     team = db.relationship("Team", backref=db.backref("employees", lazy=True))
     performance_metrics = db.relationship(
         "PerformanceMetrics", backref=db.backref("employee", lazy=True)
@@ -35,8 +42,9 @@ class Employee(User):
 
 
 class Manager(User):
-    id = db.Column(db.UUID, db.ForeignKey("user.id"), primary_key=True)
-    team_id = db.Column(db.UUID, db.ForeignKey("team.id"))
+    __tablename__ = "manager"
+    id = db.Column(db.String(36), db.ForeignKey("user.id"), primary_key=True)
+    team_id = db.Column(db.String(36), db.ForeignKey("team.id"))
     team = db.relationship("Team", backref=db.backref("manager", lazy=True))
     manager_performance_metrics = db.relationship(
         "ManagerPerformanceMetrics", backref=db.backref("manager", lazy=True)
@@ -47,16 +55,18 @@ class Manager(User):
 
 
 class Leader(User):
-    id = db.Column(db.UUID, db.ForeignKey("user.id"), primary_key=True)
+    __tablename__ = "leader"
+    id = db.Column(db.String(36), db.ForeignKey("user.id"), primary_key=True)
     teams = db.relationship("Team", backref=db.backref("leader", lazy=True))
 
     def get_performance_metrics(self):
         return {}
 
 
-class EmployeePerformanceMetrics(db.Model):
-    id = db.Column(db.UUID, primary_key=True, default=uuid.uuid4)
-    employee_id = db.Column(db.UUID, db.ForeignKey("user.id"))
+class EmployeePerformanceMetrics(Base):
+    __tablename__ = "employee_performance_metrics"
+    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
+    employee_id = db.Column(db.String(36), db.ForeignKey("user.id"))
     employee = db.relationship("User", backref="employee_performance_metrics")
     calls_handled = db.Column(db.Integer)
     average_call_length = db.Column(db.Integer)
@@ -64,9 +74,10 @@ class EmployeePerformanceMetrics(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-class ManagerPerformanceMetrics(db.Model):
-    id = db.Column(db.UUID, primary_key=True, default=uuid.uuid4)
-    team_id = db.Column(db.UUID, db.ForeignKey("team.id"))
+class ManagerPerformanceMetrics(Base):
+    __tablename__ = "manager_performance_metrics"
+    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
+    team_id = db.Column(db.String(36), db.ForeignKey("team.id"))
     team = db.relationship("Team", backref=db.backref("manager_performance_metrics", lazy=True))
     average_call_length_per_problem_type = db.Column(db.Integer)
     call_workload = db.Column(db.Integer)

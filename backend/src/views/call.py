@@ -1,5 +1,5 @@
 from flask import Blueprint
-from ..database.models import Call, db
+from database.models.call.call import Call
 
 call_blueprint = Blueprint('call', __name__)
 
