@@ -1,14 +1,15 @@
-from src.database.db import db
+from app import run_app
+from database.db import db
 import uuid
-from src.database.models.call.call import Call
-from src.database.models.call.problem import Problem
-from src.database.models.call.recording import Recording
-from src.database.models.call.solution import Solution
-from src.database.models.call_analysis import CallAnalysis
-from src.database.models.customer import Customer
-from src.database.models.queueing_theory_model import QueueingTheoryModel, QueueingTheoryBestMatch
-from src.database.models.users.team import Team, TeamPerformanceMetrics
-from src.database.models.users.user import Employee, Manager, Leader, User, EmployeePerformanceMetrics
+from database.models.call.call import Call
+from database.models.call.problem import Problem
+from database.models.call.recording import Recording
+from database.models.call.solution import Solution
+from database.models.call_analysis import CallAnalysis
+from database.models.customer import Customer
+from database.models.queueing_theory_model import QueueingTheoryModel, QueueingTheoryBestMatch
+from database.models.users.team import Team, TeamPerformanceMetrics
+from database.models.users.user import Employee, Manager, Leader, User, EmployeePerformanceMetrics
 
 
 def insert_dummy_values():
@@ -58,3 +59,7 @@ def insert_dummy_values():
     db.session.add(employee_performance_metrics)
 
     db.session.commit()
+
+if __name__ == "__main__":
+    run_app()
+    insert_dummy_values()

@@ -1,15 +1,17 @@
 import uuid
 from datetime import datetime
 from database.db import db
+from database.models.users.user import Base
 
 
-class Call(db.Model):
-    id = db.Column(db.UUID, primary_key=True, default=uuid.uuid4)
-    customer_id = db.Column(db.UUID, db.ForeignKey("customer.id"))
+class Call(Base):
+    __tablename__ = "call"
+    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
+    customer_id = db.Column(db.String(36), db.ForeignKey("customer.id"))
     customer = db.relationship("Customer", backref=db.backref("calls", lazy=True))
-    problem_id = db.Column(db.UUID, db.ForeignKey("problem.id"))
+    problem_id = db.Column(db.String(36), db.ForeignKey("problem.id"))
     problem = db.relationship("Problem", backref=db.backref("calls", lazy=True))
-    recording_id = db.Column(db.UUID, db.ForeignKey("recording.id"))
+    recording_id = db.Column(db.String(36), db.ForeignKey("recording.id"))
     recording = db.relationship("Recording", backref=db.backref("calls", lazy=True))
     language = db.Column(db.String(255))
     feedback = db.Column(db.Text)

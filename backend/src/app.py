@@ -1,5 +1,6 @@
 from flask import Flask
-from backend.src.database.models import db
+
+from database.db import db, after_db_init
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://///tmp/test.db'
@@ -20,6 +21,7 @@ def run_app():
         # create tables only once
         db.create_all()
         db.session.commit()
+        after_db_init()
 
         app.run(host='0.0.0.0', port=4999, debug=True, use_reloader=False)
 

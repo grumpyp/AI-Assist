@@ -1,12 +1,11 @@
 import uuid
 from datetime import datetime
 from database.db import db
+from database.models.users.user import Base
 
-from backend.src.database.eventlisteners.common_eventlisteners import auto_update_at
-
-
-class Customer(db.Model):
-    id = db.Column(db.UUID, primary_key=True, default=uuid.uuid4)
+class Customer(Base):
+    __tablename__ = "customer"
+    id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
     name = db.Column(db.String(255))
     contact_info = db.Column(db.String(255))
     account_number = db.Column(db.String(255))
@@ -17,6 +16,3 @@ class Customer(db.Model):
     previous_solutions = db.Column(db.JSON)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-auto_update_at(Customer)
