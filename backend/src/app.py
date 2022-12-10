@@ -12,8 +12,10 @@ def run_app():
     with app.app_context():
         # routes
         from views.call import call_blueprint
+        from views.faq import faq_blueprint
 
         app.register_blueprint(call_blueprint, url_prefix='/call')
+        app.register_blueprint(faq_blueprint, url_prefix='/faq')
 
         db.init_app(app)
 

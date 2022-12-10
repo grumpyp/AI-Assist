@@ -5,3 +5,5 @@ API_KEY = os.environ.get('API_KEY')
 FTP_HOST = os.environ.get('FTP_HOST')
 FTP_USER = os.environ.get('FTP_USER')
 FTP_PASSWORD = os.environ.get('FTP_PASSWORD')
+# Cohere
+COHERE_API_KEY = os.environ.get('COHERE_API_KEY')
