@@ -11,7 +11,6 @@ Base = declarative_base()
 
 
 class User(Base):
-    __abstract__ = True
     __tablename__ = "user"
 
     id = db.Column(db.String(36), primary_key=True, default=uuid.uuid4)
