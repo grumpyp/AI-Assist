@@ -1,4 +1,3 @@
-from app import run_app
 from database.db import db
 import uuid
 from database.models.call.call import Call
@@ -60,7 +59,5 @@ def insert_dummy_values():
     db.session.add(employee_performance_metrics)
 
     db.session.commit()
+    print(Employee.query.get(employee.id))
 
-if __name__ == "__main__":
-    run_app()
-    insert_dummy_values()

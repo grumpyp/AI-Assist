@@ -1,7 +1,11 @@
 import uuid
 from datetime import datetime
+
+from sqlalchemy.orm import declared_attr
+
 from database.db import db
 from database.models.users.user import Base
+
 
 class Customer(Base):
     __tablename__ = "customer"
