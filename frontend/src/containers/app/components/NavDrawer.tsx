@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import { CSSObject, styled, Theme, useTheme } from '@mui/material/styles';
 import {
   AppBar as MuiAppBar,
-  appBarClasses,
   AppBarProps as MuiAppBarProps,
   Badge,
   Box,
@@ -136,48 +135,52 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
   };
 
   const getNavItem = useCallback(
-    ({ path, label, icon, divide, onClick }: NavDrawerItem) => (
-      <>
-        <ListItem
-          key={path}
-          disablePadding
-          sx={{
-            display: 'block',
-            backgroundColor: path === location.pathname ? 'black' : 'inherit',
-          }}
-        >
-          <ListItemButton
+    ({ path, label, icon, divide, onClick }: NavDrawerItem) => {
+      const selected = location.pathname === path;
+
+      return (
+        <>
+          <ListItem
+            key={path}
+            disablePadding
             sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-            onClick={() => {
-              onClick?.();
-              navigate(`/${path}`);
+              display: 'block',
             }}
           >
-            <ListItemIcon
+            <ListItemButton
               sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
               }}
+              onClick={() => {
+                onClick?.();
+                navigate(`${path}`);
+              }}
+              selected={selected}
             >
-              {icon}
-            </ListItemIcon>
-            <ListItemText primary={label} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
-        </ListItem>
-        {divide && <Divider key={`${path}divider`} />}
-      </>
-    ),
-    [navigate, open]
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                  color: selected ? 'secondary.main' : 'primary.main',
+                }}
+              >
+                {icon}
+              </ListItemIcon>
+              <ListItemText primary={label} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          {divide && <Divider key={`${path}divider`} />}
+        </>
+      );
+    },
+    [navigate, open, location.pathname]
   );
 
   return (
     <Box sx={{ display: 'flex', height: '100%' }}>
-      <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
           {!open && (
@@ -187,14 +190,14 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
               onClick={handleDrawerOpen}
               edge="start"
               sx={{
-                marginRight: 5,
+                marginRight: 3,
               }}
             >
               <MenuIcon />
             </IconButton>
           )}
           <Logo height={60} width={60} square />
-          <Typography variant="h6" noWrap component="div">
+          <Typography sx={{ p: 1 }} variant="h5" noWrap component="div">
             {items.find((item) => item.path === location.pathname)?.label}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
@@ -242,8 +245,8 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
         </DrawerHeader>
         <List>{items.filter((item) => !item.bottom).map(getNavItem)}</List>
         <Box sx={{ height: '100%' }} />
-        <Divider />
-        <List>{items.filter((item) => item.bottom).map(getNavItem)}</List>
+        {items.filter((item) => item.bottom).length === 1 && <Divider />}
+        <List color="primary">{items.filter((item) => item.bottom).map(getNavItem)}</List>
       </Drawer>
 
       <Box
