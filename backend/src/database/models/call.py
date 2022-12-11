@@ -38,15 +38,18 @@ class Call(db.Model):
                 call_dict["faqs"] = faqs
             if attr == "customer":
                 customers = {}
-                for customer in self.customer.__dict__.items():
-                    try:
-                        if customer[0] == "name" or customer[0] == "contact_info" or customer[0] == "satistfaction_rating"\
-                                or customer[0] == "id" or customer[0] == "account_number" or customer[0] == "preferences"\
-                                or customer[0] == "location":
-                            customers[customer[0]] = customer[1]
-                    except Exception:
-                        pass
-                call_dict["customer"] = customers
+                try:
+                    for customer in self.customer.__dict__.items():
+                        try:
+                            if customer[0] == "name" or customer[0] == "contact_info" or customer[0] == "satistfaction_rating"\
+                                    or customer[0] == "id" or customer[0] == "account_number" or customer[0] == "preferences"\
+                                    or customer[0] == "location":
+                                customers[customer[0]] = customer[1]
+                        except Exception:
+                            pass
+                    call_dict["customer"] = customers
+                except Exception:
+                    continue
             if attr == "problems":
                 problems = []
                 for prob in self.problems:
