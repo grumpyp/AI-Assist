@@ -31,7 +31,7 @@ export function NestedApp({ appPath }: { appPath: string }) {
           {routes.map((route) => (
             <Route key={route.path} path={getPath(route.path)} element={<route.Component />} />
           ))}
-          <Route path="*" element={<Navigate to={routes[0].path} />} />
+          <Route path="/" element={<Navigate to={routes[0].path} />} />
         </Routes>
       </NavDrawer>
     </div>
