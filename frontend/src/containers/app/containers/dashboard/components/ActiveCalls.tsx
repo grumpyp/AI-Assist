@@ -44,7 +44,12 @@ export function ActiveCalls() {
   const [rows, setRows] = React.useState<Data[]>([]);
   useEffect(() => {
     fetchAllCalls().then((calls) => {
-      setRows(calls.filter((call) => call.status === 'in progress').map(createData));
+      setRows(
+        calls
+          .filter((call) => call.status === 'in progress')
+          .map(createData)
+          .splice(-5)
+      );
     });
   }, []);
 
