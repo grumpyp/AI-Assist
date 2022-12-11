@@ -1,4 +1,9 @@
 # To start our project please head into the backend / frontend folders to read the README.md files there.
+
+## Short Video
+[![Watch the video](https://hackathon.content-baer.de/AI%20Assist%20Logo.png)]([https://youtu.be/vt5fpE0bzSY](https://youtu.be/gJvXEWb4vwA))
+
+
 ## Inspiration
 We were brainstorming about several projects for example: An AI Helper for people who can't read on write. This would be a good usecase for 3rd world-countries. In the end we decided to build an AI Assist for callcenters as we are annoyed to get useless support and waiting for hours in queues. 
 
