@@ -15,3 +15,10 @@ class Customer(db.Model):
     satisfaction_rating = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        call_dict = {}
+        for attr in self.__dict__:
+            if not attr.startswith("_"):
+                call_dict[attr] = getattr(self, attr)
+        return call_dict
