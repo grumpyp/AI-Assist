@@ -79,8 +79,10 @@ class AssemblyAI:
         highlights = [highlight["text"] for highlight in data["auto_highlights_result"]["results"]]
         sentiment = AssemblyAI.calculate_sentiment(data=data)
         call_back_wished = random.randint(0, 1)
-        faq_match = faq_matcher(data["summary"])[0].prediction
-        findings = {"userid": re.search(r"(\d{6,})", digit_cleaner).group(1),
+        # use for debug
+        faq_match = "test"
+        # faq_match = faq_matcher(data["summary"])[0].prediction
+        findings = {"userid": re.search(r"(\d{3,})", digit_cleaner).group(1),
                     "summary": data["summary"],
                     "name": person_name,
                     "text": data["text"],
