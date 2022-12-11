@@ -64,6 +64,38 @@ def insert_sample_data():
     )
     db.session.add(call)
 
+    call = Call(
+        customer_id=customer.id,
+        customer=customer,
+        sentiment=0.7,
+        problems=[Problem(
+            type="Software issue",
+            long_description="It doesn't work to upload my software on the phone",
+            summary="Upade on phone doesn't work",
+            category="Software",
+        )],
+        solutions=[
+            Solution(description="Issue resolved by providing refund for the purchase", summary="Refund provided",
+                     type="Refund")],
+        recordings=[
+            Recording(
+                duration=20,
+                recording=b"binary_recording_data",
+                transcription="Mock",
+                summary="Update on phone is broken",
+                url="https://hackathon.content-baer.de/examplecall2.m4a"
+            )
+        ],
+        language="English",
+        feedback="",
+        callback_requested=False,
+        transfer_requested=False,
+        voicemail_left=False,
+        transcript_requested=False,
+        status="in progress",
+    )
+    db.session.add(call)
+
     call_analysis = CallAnalysis(
         sentiment=0.8,
         keywords={
