@@ -177,8 +177,10 @@ def patrick():
     script_dir = os.path.dirname(__file__)
     rel_path = "example.m4a"
     abs_file_path = os.path.join(script_dir, rel_path)
+    filepath = abs_file_path
     file = upload_file(abs_file_path)
-    with open(abs_file_path, 'rb') as f:
+    # file = "https://yourfile.com/file.mp3"
+    with open(filepath, 'rb') as f:
         audio_data = f.read()
     req = AssemblyAI.summarize(file)
 
