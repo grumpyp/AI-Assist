@@ -3,20 +3,12 @@ import { Faq } from './Faq';
 import { Problem } from './Problem';
 import { Recording } from './Recording';
 import { Solution } from './Solution';
+import { Customer } from './Customer';
 
 export interface Call {
   callback_requested: boolean;
   created_at: string;
-  customer: {
-    account_number: string;
-    contact_info: string;
-    id: string;
-    location: string;
-    name: string;
-    preferences: {
-      sms: boolean;
-    };
-  };
+  customer: Customer;
   customer_id: string;
   faqs: Faq[];
   feedback: string;
