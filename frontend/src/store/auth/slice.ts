@@ -30,7 +30,9 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk('auth/logout', async () => {
-  await axios.post('/api/logout');
+  await new Promise<void>((resolve) => {
+    setTimeout(() => resolve(), 500);
+  });
 });
 
 export interface AuthState extends Loadable {
