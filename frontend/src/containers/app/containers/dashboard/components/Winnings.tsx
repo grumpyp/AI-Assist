@@ -7,15 +7,15 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function Deposits() {
+export default function Winnings() {
   return (
     <>
-      <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $3,024.00
+      <Title>Earnings per Employee</Title>
+      <Typography component="p" variant="h4" color="error">
+        - $124.00
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+        on 11 December, 2022
       </Typography>
       <div />
     </>

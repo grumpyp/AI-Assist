@@ -7,10 +7,9 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Chart from './components/Chart';
-import Deposits from './components/Deposits';
-import Orders from './components/Orders';
-import Problems from './components/Problems';
-import PieChartExample from './components/SentimentChart';
+import Winnings from './components/Winnings';
+import ActiveCalls from './components/ActiveCalls';
+import SentimentChart from './components/SentimentChart';
 
 const drawerWidth = 240;
 
@@ -67,14 +66,14 @@ export function Dashboard() {
     <Box sx={{ display: 'flex' }}>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         {/* KPI common problems */}
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-            <PieChartExample />
-            {/* <Problems /> */}
-          </Paper>
-        </Grid>
         <Grid container spacing={3}>
           {/* Chart */}
+          <Grid item xs={12} md={12} lg={12}>
+            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 400 }}>
+              <SentimentChart />
+              {/* <Problems /> */}
+            </Paper>
+          </Grid>
           <Grid item xs={12} md={8} lg={9}>
             <Paper
               sx={{
@@ -87,7 +86,7 @@ export function Dashboard() {
               <Chart />
             </Paper>
           </Grid>
-          {/* Recent Deposits */}
+          {/* Recent Winnings */}
           <Grid item xs={12} md={4} lg={3}>
             <Paper
               sx={{
@@ -97,13 +96,13 @@ export function Dashboard() {
                 height: 240,
               }}
             >
-              <Deposits />
+              <Winnings />
             </Paper>
           </Grid>
-          {/* Recent Orders */}
+          {/* Recent ActiveCalls */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <Orders />
+              <ActiveCalls />
             </Paper>
           </Grid>
         </Grid>
