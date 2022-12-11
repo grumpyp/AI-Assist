@@ -10,6 +10,7 @@ import Chart from './components/Chart';
 import Winnings from './components/Winnings';
 import ActiveCalls from './components/ActiveCalls';
 import SentimentChart from './components/SentimentChart';
+import Problems from './components/Problems';
 
 const drawerWidth = 240;
 
@@ -71,7 +72,13 @@ export function Dashboard() {
           <Grid item xs={12} md={12} lg={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 400 }}>
               <SentimentChart />
-              {/* <Problems /> */}
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={12} lg={12}>
+            <Paper
+              sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 250, maxHeight: 500 }}
+            >
+              <Problems />
             </Paper>
           </Grid>
           <Grid item xs={12} md={8} lg={9}>
@@ -101,7 +108,7 @@ export function Dashboard() {
           </Grid>
           {/* Recent ActiveCalls */}
           <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', maxHeight: 400 }}>
               <ActiveCalls />
             </Paper>
           </Grid>
