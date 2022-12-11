@@ -14,6 +14,7 @@ class Call(db.Model):
     recordings = db.relationship("Recording", lazy=False)
     employees = db.relationship("Employee", secondary=employee_call, viewonly=True)
     call_analysis = db.relationship("CallAnalysis", lazy=True, viewonly=True, uselist=False)
+    sentiment = db.Column(db.Float)
     language = db.Column(db.String(255))
     feedback = db.Column(db.Text, nullable=True)
     callback_requested = db.Column(db.Boolean)
