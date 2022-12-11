@@ -5,8 +5,26 @@ import { addLoadableCases, DEFAULT_LOADABLE, Loadable } from '../utils';
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ username, password }: { username: string; password: string }) => {
-    const response = await axios.post('/api/login', { username, password });
+  async ({ username }: { username: string; password: string }) => {
+    const response: {
+      data: {
+        user: User;
+      };
+    } = await new Promise((resolve) => {
+      setTimeout(
+        () =>
+          resolve({
+            data: {
+              user: {
+                id: username,
+                username,
+                email: 'max@mustermann.de',
+              },
+            },
+          }),
+        500
+      );
+    });
     return response.data.user;
   }
 );
@@ -31,19 +49,21 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(login.fulfilled, (state, action: PayloadAction<User>) => ({
-      ...state,
-      isAuthenticated: true,
-      user: action.payload,
-    }));
-    addLoadableCases(builder, login);
+    addLoadableCases(builder, login, {
+      fullfilled: (state, action: PayloadAction<User>) => ({
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+      }),
+    });
 
-    builder.addCase(logout.fulfilled, (state) => ({
-      ...state,
-      isAuthenticated: false,
-      user: undefined,
-    }));
-    addLoadableCases(builder, logout);
+    addLoadableCases(builder, logout, {
+      fullfilled: (state) => ({
+        ...state,
+        isAuthenticated: false,
+        user: undefined,
+      }),
+    });
   },
 });
 

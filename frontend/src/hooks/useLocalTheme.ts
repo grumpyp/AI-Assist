@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, toggleDarkMode } from '../store/site-settings';
@@ -6,15 +6,15 @@ import { selectDarkMode, toggleDarkMode } from '../store/site-settings';
 const lightTheme = createTheme({
   palette: {
     primary: {
-      main: '#2B4162',
-      light: '#667C8E',
-      dark: '#00203A',
+      main: '#111',
+      light: '#grey',
+      dark: '#000',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#FA9F42',
-      light: '#FFCB7F',
-      dark: '#C57D11',
+      main: '#FFB400',
+      light: '#FFBC1F',
+      dark: '#AD7900',
       contrastText: '#000000',
     },
     error: {
@@ -41,6 +41,10 @@ const lightTheme = createTheme({
       dark: '#1b5e20',
       contrastText: '#ffffff',
     },
+    background: {
+      default: '#FFB400',
+      paper: '#ffffff',
+    },
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
@@ -49,7 +53,6 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   palette: {
-    type: 'dark',
     primary: {
       main: '#667C8E',
       light: '#2B4162',

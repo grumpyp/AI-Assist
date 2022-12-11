@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@mui/material/styles';
 import { Link, Navigate } from 'react-router-dom';
 import {
   Button,
   Container,
-  CssBaseline,
   FormControl,
   FormHelperText,
   Grid,
   Input,
   InputLabel,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useAuth } from '../hooks';
+import { Logo } from '../components/Logo';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    container: {
+      height: '100%',
+    },
     root: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      width: '100%',
+      height: '100%',
+      justifyContent: 'center',
     },
     form: {
       width: '100%', // Fix IE 11 issue.
@@ -46,7 +52,7 @@ export function LoginPage() {
   });
 
   if (isAuthenticated) {
-    return <Navigate to="/jl" />;
+    return <Navigate to="/ai-assist" />;
   }
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,10 +92,9 @@ export function LoginPage() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container component="main" maxWidth="xs" className={classes.container}>
       <div className={classes.root}>
-        <img src="/logo.png" alt="Logo" />
+        <Logo width={200} height={200} />
 
         <Typography variant="h5" gutterBottom>
           Login
