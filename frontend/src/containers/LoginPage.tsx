@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { Link, Navigate } from 'react-router-dom';
 import {
   Button,
@@ -14,31 +14,39 @@ import {
 import { useAuth } from '../hooks';
 import { Logo } from '../components/Logo';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      height: '100%',
-    },
-    root: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: '100%',
-      height: '100%',
-      justifyContent: 'center',
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  })
-);
+const PREFIX = 'LoginPage';
+
+const classes = {
+  container: `${PREFIX}-container`,
+  root: `${PREFIX}-root`,
+  form: `${PREFIX}-form`,
+  submit: `${PREFIX}-submit`,
+};
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+  [`&.${classes.container}`]: {
+    height: '100%',
+  },
+  [`& .${classes.root}`]: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+  },
+
+  [`& .${classes.form}`]: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+
+  [`& .${classes.submit}`]: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 export function LoginPage() {
-  const classes = useStyles();
   const { isAuthenticated, loginUser, loading, error } = useAuth();
 
   const [formState, setFormState] = useState({
@@ -92,7 +100,7 @@ export function LoginPage() {
   };
 
   return (
-    <Container component="main" maxWidth="xs" className={classes.container}>
+    <StyledContainer maxWidth="xs" className={classes.container}>
       <div className={classes.root}>
         <Logo width={200} height={200} />
 
@@ -155,6 +163,6 @@ export function LoginPage() {
           </Grid>
         </form>
       </div>
-    </Container>
+    </StyledContainer>
   );
 }
