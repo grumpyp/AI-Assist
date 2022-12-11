@@ -3,7 +3,7 @@ from database.models.call import Call
 call_blueprint = Blueprint('call', __name__)
 
 
-@call_blueprint.route('/')
+@call_blueprint.route('/list')
 def all_calls():
     calls = [call.to_dict() for call in Call.query.all()]
     return calls
