@@ -31,7 +31,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   await new Promise<void>((resolve) => {
-    setTimeout(() => resolve(), 500);
+    setTimeout(() => resolve(), 20);
   });
 });
 
