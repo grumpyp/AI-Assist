@@ -1,22 +1,33 @@
 import React from 'react';
-import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
+import { styled } from '@mui/material/styles';
+import { Button, Grid, Typography } from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = 'LandingPage';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  logo: `${PREFIX}-logo`,
+  loginButton: `${PREFIX}-loginButton`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`&.${classes.root}`]: {
     width: '100%',
     height: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logo: {
+
+  [`& .${classes.logo}`]: {
     fontSize: '3rem',
     fontWeight: 'bold',
   },
-  loginButton: {
+
+  [`& .${classes.loginButton}`]: {
     position: 'absolute',
     top: theme.spacing(2),
     right: theme.spacing(2),
@@ -24,10 +35,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function LandingPage() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <Grid>
         <Logo showSlogan />
         <Typography variant="subtitle1" align="center">
@@ -49,6 +58,6 @@ export function LandingPage() {
           </Button>
         </Link>
       </Grid>
-    </div>
+    </Root>
   );
 }
