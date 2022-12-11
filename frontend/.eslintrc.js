@@ -48,12 +48,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: [
-          '**/*.test.tsx',
-          '**/*.test.ts',
-          '**/*.spec.tsx',
-          '**/*.spec.ts',
-        ],
+        devDependencies: ['**/*.test.tsx', '**/*.test.ts', '**/*.spec.tsx', '**/*.spec.ts'],
         optionalDependencies: false,
       },
     ],
@@ -68,6 +63,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'no-unused-vars': 'warn',
     'react/function-component-definition': [
       'error',
       {

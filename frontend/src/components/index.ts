@@ -1,2 +1,2 @@
 export * from './ProtectedRoute';
-export * from './LoginPage';
+export * from '../containers/LoginPage';
