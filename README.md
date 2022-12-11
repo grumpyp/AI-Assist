@@ -1,7 +1,7 @@
 # To start our project please head into the backend / frontend folders to read the README.md files there.
 
 ## Short Video
-[![Watch the video](https://hackathon.content-baer.de/AI%20Assist%20Logo.png)]([https://youtu.be/vt5fpE0bzSY](https://youtu.be/gJvXEWb4vwA))
+[![Watch the video](https://hackathon.content-baer.de/AI%20Assist%20Logo.png)](https://www.youtube.com/watch?v=gJvXEWb4vwA)
 
 
 ## Inspiration
