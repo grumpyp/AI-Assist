@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import Chart from './components/Chart';
 import Deposits from './components/Deposits';
 import Orders from './components/Orders';
+import Problems from './components/Problems';
+import PieChartExample from './components/SentimentChart';
 
 const drawerWidth = 240;
 
@@ -64,6 +66,13 @@ export function Dashboard() {
   return (
     <Box sx={{ display: 'flex' }}>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        {/* KPI common problems */}
+        <Grid item xs={12}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+            <PieChartExample />
+            {/* <Problems /> */}
+          </Paper>
+        </Grid>
         <Grid container spacing={3}>
           {/* Chart */}
           <Grid item xs={12} md={8} lg={9}>
