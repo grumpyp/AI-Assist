@@ -64,7 +64,8 @@ function fetchAllCalls(): void {
                 transcript_requested: data.transcript_requested,
                 transfer_requested: data.transfer_requested,
                 updated_at: data.updated_at,
-                voicemail_left: data.voicemail_left
+                voicemail_left: data.voicemail_left,
+                sentiment: data.sentiment
             };
             console.log(call);
         });
