@@ -90,8 +90,8 @@ function mapSentimentToString(sentiment: number): string {
 }
 
 function createData(call: Call): Data {
-  const customer = call.customer.name;
-  const customerId = call.customer.id;
+  const customer = call.customer?.name;
+  const customerId = call.customer?.id;
   const customerMood = mapSentimentToString(call.sentiment);
   const { language, status } = call;
   const problemSummary = call.problems[0]?.summary;
