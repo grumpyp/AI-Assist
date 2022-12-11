@@ -1,13 +1,19 @@
-# To start our project please head into the backend / frontend folders to read the README.md files there.
+If you want to check out the how to start the the apps, checkout backend and frontend readmes.
 
 ## Short Video
 [![Watch the video](https://hackathon.content-baer.de/AI%20Assist%20Logo.png)](https://www.youtube.com/watch?v=gJvXEWb4vwA)
 
+## Slogan
+AI-powered customer support for a smarter, more efficient experience
+
+## Company - Description
+At AI-Assist We use advanced artificial intelligence technology to provide expert customer support services. Our AI-powered helpdesk verifies customer identities, collects and stores user data, and provides personalized support options. With AI Assist, your customers will enjoy a faster, more efficient support experience, and your business will benefit from valuable insights and improved performance. Try AI Assist today and see the difference for yourself.
 
 ## Inspiration
 We were brainstorming about several projects for example: An AI Helper for people who can't read on write. This would be a good usecase for 3rd world-countries. In the end we decided to build an AI Assist for callcenters as we are annoyed to get useless support and waiting for hours in queues. 
 
 Our AI Assists uses "queue-theory" to match our staff with calls which are best to work on to reduce waiting time for all. Furthermore it helps agents to give better support. It allows managers and supervisors to find critical pain point of products but also to give feedback about general support success.
+
 
 ## What it does
 The software is basically a dashboard which has 3 different views. The calls view is the view of all incoming calls. The incoming calls are started by a bot which asks for a problem and the customerid to identify and map the customer to our platform. While the helpdesk staff is able to pick their best-match our software also proposes help for them. **It matches problems described by the customers to our FAQ's using the Cohere API.** Furthermore it also references to our problem database to make answering easy for the agent. 
@@ -19,6 +25,9 @@ On the dashboard view, managers and supervisors can get critical business inform
 __A little example: Agents have more than 50 calls a day nowadays, they don't really have the time nor the energy to think about common problems. Our AI does that for you. We summarize everything and point you to crucial problems__
 
 In the history view, agents can check their history of calls. It also provides additional information to supervisors. They should be able to check team success and other details.
+
+## What it will do
+Verifies customer identities quickly and accurately, collects and stores user data for personalized support, provides options for routing calls to the appropriate department or employee, offers a way for customers to provide additional information or feedback during the call, allows customers to request a callback or leave a voicemail, records calls for quality assurance or compliance purposes, analyzes data using advanced APIs and algorithms, matches calls to employees based on their performance metrics, provides insights and recommendations based on data analysis, and improves accuracy and reliability over time through machine learning.
 
 ## How we built it
 Our database model is build with SQLalchemy based on Flask. Our backend also relies on Python and Flask. We use React with Typescript in our Frontend. The voice data is uploaded to as sever via FTP.
@@ -38,11 +47,12 @@ Definitly our database model! We also like the outcome of our idea brainstorming
 * Assembly API
 * SQLAlchemy
 * Database modeling
+* React/React Redux and Material Ui
 
 ## What's next for AI Assist
-
-
-
+* In-depth market research, do potential customer interviews, and competitive analysis.
+* Write a business plan and greater pitch to outline our product (feature analysis,...), target market, financial projections. Potentially find investors and business partners.
+* Clean our code and develop an MVP
 
 
 ## Brainstorming Saturday morning 1 am
@@ -130,3 +140,6 @@ häufigste Calls um 14:00 Uhr
 
 ![database model](https://content-baer.de/wp-content/uploads/2022/12/WhatsApp-Image-2022-12-10-at-00.22.44-1.jpeg "Database model")
 
+# Contact the Creators
+[Patrick Gerard (Devops Engineer)](https://www.linkedin.com/in/patrick-gerard-konstanz/)
+[Julius Lipp (Software Engineer)](https://www.linkedin.com/in/julius-lipp/)
