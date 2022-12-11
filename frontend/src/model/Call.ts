@@ -35,16 +35,7 @@ export function fetchAllCalls(): Promise<Call[]> {
         const call: Call = {
           callback_requested: data.callback_requested,
           created_at: data.created_at,
-          customer: {
-            account_number: data.customer.account_number,
-            contact_info: data.customer.contact_info,
-            id: data.customer.id,
-            location: data.customer.location,
-            name: data.customer.name,
-            preferences: {
-              sms: data.customer.preferences.sms,
-            },
-          },
+          customer: data.customer,
           customer_id: data.customer_id,
           faqs: data.faqs,
           feedback: data.feedback,
