@@ -15,6 +15,7 @@ import {
   AccountCircle,
 } from '@mui/icons-material';
 import { useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
 import { Call, fetchAllCalls } from '../../../../model/Call';
 
 interface Column {
@@ -57,7 +58,7 @@ const columns: readonly Column[] = [
     label: 'Status',
     format: (value: number) => value.toFixed(2),
   },
-  { id: 'calls', label: 'Calls' },
+  { id: 'calls', label: 'Calls', minWidth: 190 },
 ];
 
 interface Data {
@@ -118,7 +119,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell align="left">{row.customerMood}</TableCell>
         <TableCell align="left">{row.language}</TableCell>
         <TableCell align="left">{row.problemSummary}</TableCell>
-        <TableCell align="left">{`${row.faq}`}</TableCell>
+        <TableCell align="left">{row.faq ? 'Yes' : 'No'}</TableCell>
         <TableCell align="left">{row.status}</TableCell>
         <TableCell align="left">
           <Button variant="contained" color="secondary" startIcon={<Phone />}>
@@ -127,7 +128,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={9}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <div>Details</div>
           </Collapse>
@@ -141,10 +142,10 @@ export function LiveCalls() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [rows, setRows] = React.useState<Data[]>([]);
-
+  const theme = useTheme();
   useEffect(() => {
     fetchAllCalls().then((calls) => {
-      setRows(calls.map(createData));
+      setRows(calls.filter((call) => call.status === 'in progress').map(createData));
     });
   }, []);
 
@@ -158,19 +159,28 @@ export function LiveCalls() {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
+    <Paper
+      sx={{
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <TableContainer sx={{ maxHeight: '100%', width: '100%' }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead color="secondary">
+          <TableHead>
             <TableRow>
-              <TableCell />
+              <TableCell style={{ background: theme.palette.secondary.main }} />
               {columns.map((column) => (
                 <TableCell
+                  variant="head"
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth, background: theme.palette.secondary.main }}
                 >
-                  <Typography color="secondary">{column.label}</Typography>
+                  <Typography>{column.label}</Typography>
                 </TableCell>
               ))}
             </TableRow>
@@ -183,6 +193,7 @@ export function LiveCalls() {
         </Table>
       </TableContainer>
       <TablePagination
+        sx={{ marginTop: 'auto' }}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
