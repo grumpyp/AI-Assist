@@ -5,6 +5,8 @@ import { NavDrawer } from './components/NavDrawer';
 import { routes } from './containers';
 import { useAuth } from '../../hooks';
 
+const Dashboard = routes[0].Component;
+
 export function NestedApp({ appPath }: { appPath: string }) {
   const getPath = useCallback((path: string) => `${appPath}/${path}`, [appPath]);
   const { logoutUser } = useAuth();
@@ -29,7 +31,7 @@ export function NestedApp({ appPath }: { appPath: string }) {
       >
         <Routes>
           {routes.map((route) => (
-            <Route key={route.path} path={getPath(route.path)} element={<route.Component />} />
+            <Route key={route.path} path={route.path} element={<route.Component />} />
           ))}
           <Route path="/" element={<Navigate to={routes[0].path} />} />
         </Routes>

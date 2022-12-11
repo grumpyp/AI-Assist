@@ -168,7 +168,7 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
             <ListItemText primary={label} sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
         </ListItem>
-        {divide && <Divider />}
+        {divide && <Divider key={`${path}divider`} />}
       </>
     ),
     [navigate, open]
@@ -243,8 +243,9 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
         <List>{items.filter((item) => item.bottom).map(getNavItem)}</List>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader>{children}</DrawerHeader>
+      <Box component="main" sx={{ p: 3, height: '100%', width: '100%' }}>
+        <DrawerHeader />
+        {children}
       </Box>
     </Box>
   );

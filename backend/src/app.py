@@ -27,6 +27,11 @@ def run_app():
         after_db_init()
         insert_sample_data()
         patrick()
+
+        @app.after_request
+        def add_cors_headers(response):
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response
         app.run(host='0.0.0.0', port=4999, debug=True, use_reloader=False)
 
 
