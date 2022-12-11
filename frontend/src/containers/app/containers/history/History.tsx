@@ -7,9 +7,26 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Box, Button, Collapse, IconButton, Typography } from '@mui/material';
+import {
+  KeyboardArrowUp as KeyboardArrowUpIcon,
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  Phone,
+  AccountCircle,
+} from '@mui/icons-material';
+import { useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
+import { Call, fetchAllCalls } from '../../../../model/Call';
 
 interface Column {
-  id: 'name' | 'code' | 'population' | 'size' | 'density';
+  id:
+    | 'customerId'
+    | 'language'
+    | 'problemSummary'
+    | 'solutionSummary'
+    | 'feedback'
+    | 'recorded'
+    | 'status';
   label: string;
   minWidth?: number;
   align?: 'right';
@@ -17,65 +34,110 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'customerId', label: 'Customer', minWidth: 100 },
   {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
+    id: 'language',
+    label: 'Language',
+    minWidth: 100,
     format: (value: number) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
+    id: 'problemSummary',
+    label: 'Problem Summary',
   },
   {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
+    id: 'solutionSummary',
+    label: 'Solution Summary',
+  },
+  {
+    id: 'feedback',
+    label: 'Feedback',
+  },
+  {
+    id: 'recorded',
+    label: 'Recorded',
+  },
+  {
+    id: 'status',
+    label: 'Status',
     format: (value: number) => value.toFixed(2),
   },
 ];
 
 interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
+  call: Call;
+  customerId: string;
+  language: string;
+  problemSummary: string;
+  solutionSummary: string;
+  feedback: string;
+  recorded: string;
+  status: string;
 }
 
-function createData(name: string, code: string, population: number, size: number): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
+function createData(call: Call): Data {
+  const customerId = call.customer.id;
+  const { language } = call;
+  const problemSummary = call.problems[0].summary;
+  const solutionSummary = call.solutions[0].summary;
+  const { feedback } = call;
+  const recorded = call.recordings.length > 0 ? 'Yes' : 'No';
+  const { status } = call;
+  return {
+    call,
+    customerId,
+    language,
+    problemSummary,
+    solutionSummary,
+    feedback,
+    recorded,
+    status,
+  };
 }
 
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-];
+function Row(props: { row: ReturnType<typeof createData> }) {
+  const { row } = props;
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <TableCell>
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {row.customerId}
+        </TableCell>
+        <TableCell align="left">{row.language}</TableCell>
+        <TableCell align="left">{row.problemSummary}</TableCell>
+        <TableCell align="left">{row.solutionSummary}</TableCell>
+        <TableCell align="left">{row.feedback}</TableCell>
+        <TableCell align="left">{row.recorded}</TableCell>
+        <TableCell align="left">{row.status}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={9}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <div>Details</div>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
+  );
+}
 
 export function History() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
+  const [rows, setRows] = React.useState<Data[]>([]);
+  const theme = useTheme();
+  useEffect(() => {
+    fetchAllCalls().then((calls) => {
+      setRows(calls.filter((call) => call.status === 'completed').map(createData));
+    });
+  }, []);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -87,41 +149,41 @@ export function History() {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper
+      sx={{
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <TableContainer sx={{ maxHeight: '100%', width: '100%' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
+              <TableCell style={{ background: theme.palette.secondary.main }} />
               {columns.map((column) => (
                 <TableCell
+                  variant="head"
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth, background: theme.palette.secondary.main }}
                 >
-                  {column.label}
+                  <Typography>{column.label}</Typography>
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
+              return <Row key={row.call.id} row={row} />;
             })}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
+        sx={{ marginTop: 'auto' }}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}

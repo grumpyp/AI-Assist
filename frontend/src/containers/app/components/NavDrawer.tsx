@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { CSSObject, styled, Theme, useTheme } from '@mui/material/styles';
 import {
   AppBar as MuiAppBar,
+  appBarClasses,
   AppBarProps as MuiAppBarProps,
   Badge,
   Box,
@@ -175,21 +176,23 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: '100%' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
+          {!open && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Logo height={60} width={60} square />
           <Typography variant="h6" noWrap component="div">
             {items.find((item) => item.path === location.pathname)?.label}
@@ -243,9 +246,12 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
         <List>{items.filter((item) => item.bottom).map(getNavItem)}</List>
       </Drawer>
 
-      <Box component="main" sx={{ p: 3, height: '100%', width: '100%' }}>
+      <Box
+        component="main"
+        sx={{ p: 3, width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}
+      >
         <DrawerHeader />
-        {children}
+        <Box sx={{ flexGrow: 1 }}>{children}</Box>
       </Box>
     </Box>
   );
