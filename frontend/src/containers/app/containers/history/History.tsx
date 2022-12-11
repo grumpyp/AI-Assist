@@ -76,12 +76,12 @@ interface Data {
 }
 
 function createData(call: Call): Data {
-  const customerId = call.customer.id;
+  const customerId = call.customer?.id;
   const { language } = call;
-  const problemSummary = call.problems[0].summary;
-  const solutionSummary = call.solutions[0].summary;
+  const problemSummary = call.problems?.[0].summary;
+  const solutionSummary = call.solutions?.[0].summary;
   const { feedback } = call;
-  const recorded = call.recordings.length > 0 ? 'Yes' : 'No';
+  const recorded = call.recordings?.length > 0 ? 'Yes' : 'No';
   const { status } = call;
   return {
     call,
