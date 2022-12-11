@@ -171,8 +171,8 @@ def insert_sample_data():
     print(Call.query.all())
 
 def patrick():
-    from backend.src.processing.assemblyAI.fileupload import upload_file
-    from backend.src.processing.assemblyAI.summarize import AssemblyAI
+    from src.processing.assemblyAI.fileupload import upload_file
+    from src.processing.assemblyAI.summarize import AssemblyAI
     filepath = "/Users/patrickgerard/Documents/Programmierung/-50k-AI-Hackathon/backend/src/examplecall3.m4a"
     file = upload_file("/Users/patrickgerard/Documents/Programmierung/-50k-AI-Hackathon/backend/src/example.m4a")
     with open(filepath, 'rb') as f:
