@@ -18,14 +18,20 @@ const PREFIX = 'LoginPage';
 
 const classes = {
   container: `${PREFIX}-container`,
+  main: `${PREFIX}-main`,
   root: `${PREFIX}-root`,
   form: `${PREFIX}-form`,
   submit: `${PREFIX}-submit`,
 };
 
-const StyledContainer = styled(Container)(({ theme }) => ({
+const StyledDiv = styled('div')(({ theme }) => ({
   [`&.${classes.container}`]: {
     height: '100%',
+  },
+  [`&.${classes.main}`]: {
+    height: '100%',
+    width: '100%',
+    background: theme.palette.secondary.main,
   },
   [`& .${classes.root}`]: {
     display: 'flex',
@@ -100,69 +106,71 @@ export function LoginPage() {
   };
 
   return (
-    <StyledContainer maxWidth="xs" className={classes.container}>
-      <div className={classes.root}>
-        <Logo width={200} height={200} />
+    <StyledDiv className={classes.main}>
+      <Container maxWidth="xs" className={classes.container} sx={{ height: '100%' }}>
+        <div className={classes.root}>
+          <Logo width={200} height={200} />
 
-        <Typography variant="h5" gutterBottom>
-          Login
-        </Typography>
-
-        {error && (
-          <Typography variant="body1" color="error">
-            {error.message}
+          <Typography variant="h5" gutterBottom>
+            Login
           </Typography>
-        )}
 
-        <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="username">Username</InputLabel>
-            <Input
-              id="username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              value={formState.username}
-              onChange={handleFormChange}
-            />
-            {validationErrors.username && (
-              <FormHelperText error>{validationErrors.username}</FormHelperText>
-            )}
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              name="password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={formState.password}
-              onChange={handleFormChange}
-            />
-            {validationErrors.password && (
-              <FormHelperText error>{validationErrors.password}</FormHelperText>
-            )}
-          </FormControl>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? 'Signing in...' : 'Sign in'}
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/register">Register</Link>
+          {error && (
+            <Typography variant="body1" color="error">
+              {error.message}
+            </Typography>
+          )}
+
+          <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="username">Username</InputLabel>
+              <Input
+                id="username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={formState.username}
+                onChange={handleFormChange}
+              />
+              {validationErrors.username && (
+                <FormHelperText error>{validationErrors.username}</FormHelperText>
+              )}
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input
+                name="password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={formState.password}
+                onChange={handleFormChange}
+              />
+              {validationErrors.password && (
+                <FormHelperText error>{validationErrors.password}</FormHelperText>
+              )}
+            </FormControl>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? 'Signing in...' : 'Sign in'}
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link to="/register">Register</Link>
+              </Grid>
+              <Grid item>
+                <Link to="/forgot-password">Forgot password?</Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link to="/forgot-password">Forgot password?</Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </StyledContainer>
+          </form>
+        </div>
+      </Container>
+    </StyledDiv>
   );
 }
