@@ -251,7 +251,14 @@ export function NavDrawer({ children, items }: NavDrawerProps) {
 
       <Box
         component="main"
-        sx={{ p: 3, width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}
+        sx={{
+          p: 3,
+          display: 'flex',
+          width: open ? `calc(100% - ${drawerWidth}px)` : 'calc(100% - 64px)',
+          flexDirection: 'column',
+          background: 'black',
+          overflow: 'auto',
+        }}
       >
         <DrawerHeader />
         <Box sx={{ flexGrow: 1 }}>{children}</Box>
