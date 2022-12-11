@@ -17,6 +17,7 @@ import {
 import { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Call, fetchAllCalls } from '../../../../model/Call';
+import CallCard from '../../components/CallCard';
 
 interface Column {
   id:
@@ -120,7 +121,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={9}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <div>Details</div>
+            <CallCard call={row.call} />
           </Collapse>
         </TableCell>
       </TableRow>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { LoginPage, ProtectedRoute } from './components';
