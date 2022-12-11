@@ -12,7 +12,7 @@ export interface Call {
     };
   };
   customer_id: string;
-  faqs: any[];
+  faqs: Faq[];
   feedback: string;
   id: string;
   language: string;
