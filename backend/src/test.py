@@ -35,6 +35,7 @@ def insert_sample_data():
     call = Call(
         customer_id=customer.id,
         customer=customer,
+        sentiment=0.4,
         problems=[Problem(
             type="Billing issue",
             long_description="Customer has a billing issue with their recent purchase of an iphone at company X",
