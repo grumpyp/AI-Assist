@@ -138,7 +138,8 @@ def patrick():
                 recordings=[Recording(duration=process_call.get('audio_duration'), recording=audio_data,
                 call_id=process_call.get('call_id'), url=file)], language=process_call.get('language_code'),
                 callback_requested=process_call.get('callback_requested'), transfer_requested=False,
-                voicemail_left=False, transcript_requested=False, status="in progress", faqs=process_call.get('faqs'),)
+                voicemail_left=False, transcript_requested=False, status="in progress", faqs=process_call.get('faqs'),
+                sentiment=process_call.get('sentiment'))
     db.session.add(call)
     db.session.commit()
     print(Call.query.all())
