@@ -7,7 +7,7 @@ const lightTheme = createTheme({
   palette: {
     primary: {
       main: '#111',
-      light: '#grey',
+      light: '#afafafaf',
       dark: '#000',
       contrastText: '#ffffff',
     },
@@ -42,12 +42,17 @@ const lightTheme = createTheme({
       contrastText: '#ffffff',
     },
     background: {
-      default: '#FFB400',
+      default: '#FFBC1F',
       paper: '#ffffff',
     },
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
+  },
+  components: {
+    MuiDrawer: {
+      styleOverrides: {},
+    },
   },
 });
 
@@ -88,6 +93,9 @@ const darkTheme = createTheme({
       light: '#4caf50',
       dark: '#1b5e20',
       contrastText: '#ffffff',
+    },
+    background: {
+      paper: '#111',
     },
   },
   typography: {
