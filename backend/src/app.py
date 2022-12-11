@@ -30,7 +30,8 @@ def run_app():
 
         @app.after_request
         def add_cors_headers(response):
-            response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
             response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, PATCH'
             return response
         app.run(host='0.0.0.0', port=4999, debug=True, use_reloader=False)
