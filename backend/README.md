@@ -12,6 +12,10 @@ export FTP_USER=f0b;
 export COHERE_API_KEY=XE52rKQg45hsYugR1
 ```
 
+In case you want to use mock data, you can comment out line 181, 184 in `test.py` and uncomment 182, 188.
+
+
+
 ### Run
 
 Make sure you got Python > 3.6 installed. Then run the following commands:
