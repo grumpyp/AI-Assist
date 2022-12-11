@@ -13,6 +13,13 @@ class Faq(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def to_dict(self):
+        call_dict = {}
+        for attr in self.__dict__:
+            if not attr.startswith("_"):
+                call_dict[attr] = getattr(self, attr)
+        return call_dict
+
     def save(self):
         db.session.add(self)
         db.session.commit()
