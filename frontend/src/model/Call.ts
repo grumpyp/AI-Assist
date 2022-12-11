@@ -26,7 +26,7 @@ export interface Call {
 }
 
 export function fetchAllCalls(): Promise<Call[]> {
-  const url = 'http://127.0.0.1:4999/call/list';
+  const url = 'http://18.156.36.216:4999/call/list';
   return axios
     .get(url)
     .then((response) => response.data)
