@@ -25,7 +25,7 @@ export default function Chart() {
 
   return (
     <>
-      <Title>Today</Title>
+      <Title>Employee Wrokload</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -51,7 +51,7 @@ export default function Chart() {
                 ...theme.typography.body1,
               }}
             >
-              Employee Workload
+              Calls/Employee/Hour
             </Label>
           </YAxis>
           <Line

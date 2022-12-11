@@ -8,7 +8,10 @@ import {
   Legend,
   Tooltip,
   CartesianGrid,
+  ResponsiveContainer,
 } from 'recharts';
+import { useTheme } from '@mui/material/styles';
+import Title from './Title';
 
 const data01 = [
   {
@@ -76,20 +79,45 @@ const data01 = [
 ];
 
 export function PieChartExample() {
+  const theme = useTheme();
   return (
-    <ScatterChart width={1200} height={250} margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="x" name="Month" />
-      <YAxis
-        dataKey="y"
-        name="Sentiment Score"
-        label={{ value: 'Sentiment Score', angle: -90, position: 'insideLeft' }}
-      />
-      <ZAxis dataKey="z" range={[64, 144]} name="Calls" />
-      <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-      <Legend />
-      <Scatter name="Calldata" data={data01} fill="#8884d8" />
-    </ScatterChart>
+    <>
+      <Title>Sentiments</Title>
+      <ResponsiveContainer>
+        <ScatterChart
+          margin={{
+            top: 16,
+            right: 16,
+            bottom: 0,
+            left: 24,
+          }}
+        >
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke={theme.palette.text.secondary}
+            style={theme.typography.body2}
+          />
+          <XAxis
+            dataKey="x"
+            name="Month"
+            style={theme.typography.body2}
+            color={theme.palette.text.secondary}
+          />
+          <YAxis
+            style={theme.typography.body2}
+            color={theme.palette.secondary.main}
+            dataKey="y"
+            name="Sentiment Score"
+            label={{ value: 'Sentiment Score', angle: -90, position: 'insideLeft' }}
+            domain={[0, 1]}
+          />
+          <ZAxis dataKey="z" range={[64, 144]} name="Calls" />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Legend />
+          <Scatter name="Calldata" data={data01} fill={theme.palette.secondary.main} />
+        </ScatterChart>
+      </ResponsiveContainer>
+    </>
   );
 }
 
