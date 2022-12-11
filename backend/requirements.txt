@@ -1,3 +1,5 @@
 uuid
 flask_sqlalchemy
 flask
+requests
+cohere

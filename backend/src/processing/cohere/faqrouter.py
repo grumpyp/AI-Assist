@@ -3,8 +3,8 @@
 
 import cohere
 from cohere.classify import Example
-from backend.src.processing.config import COHERE_API_KEY
-from backend.src.database.models.faq import Faq
+from src.processing.config import COHERE_API_KEY
+from src.database.models.faq import Faq
 
 
 def faq_matcher(input_text):
