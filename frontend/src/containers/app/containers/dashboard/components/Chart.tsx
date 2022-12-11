@@ -25,7 +25,7 @@ export default function Chart() {
 
   return (
     <>
-      <Title>Employee Wrokload</Title>
+      <Title>Employee Workload</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
