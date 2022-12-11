@@ -17,25 +17,28 @@ interface CallProps {
 export function CallCard({ call }: CallProps) {
   return (
     <Card>
-      <CardHeader title={`Call ID: ${call.id}`} />
+      <CardHeader title="Call" />
       <CardContent>
-        <Typography variant="h5">Created at: {call.created_at}</Typography>
-        <Typography variant="h5">Language: {call.language}</Typography>
-        <Typography variant="h5">
+        <Typography variant="body1">Call id: {call.id}</Typography>
+        <Typography variant="body1">Created at: {call.created_at}</Typography>
+        <Typography variant="body1">Language: {call.language}</Typography>
+        <Typography variant="body1">
           Callback requested: {call.callback_requested ? 'Yes' : 'No'}
         </Typography>
-        <Typography variant="h5">
+        <Typography variant="body1">
           Transcript requested: {call.transcript_requested ? 'Yes' : 'No'}
         </Typography>
-        <Typography variant="h5">
+        <Typography variant="body1">
           Transfer requested: {call.transfer_requested ? 'Yes' : 'No'}
         </Typography>
-        <Typography variant="h5">Voicemail left: {call.voicemail_left ? 'Yes' : 'No'}</Typography>
-        <Typography variant="h5">Sentiment: {call.sentiment}</Typography>
+        <Typography variant="body1">
+          Voicemail left: {call.voicemail_left ? 'Yes' : 'No'}
+        </Typography>
+        <Typography variant="body1">Sentiment: {call.sentiment}</Typography>
 
         {call.problems.length > 0 && (
           <>
-            <Typography variant="h5">Problems:</Typography>
+            <Typography variant="body1">Problems:</Typography>
             <List>
               {call.problems.map((problem) => (
                 <ListItem key={problem.id}>
@@ -48,7 +51,7 @@ export function CallCard({ call }: CallProps) {
 
         {call.solutions.length > 0 && (
           <>
-            <Typography variant="h5">Solutions:</Typography>
+            <Typography variant="body1">Solutions:</Typography>
             <List>
               {call.solutions.map((solution) => (
                 <ListItem key={solution.id}>
@@ -61,7 +64,7 @@ export function CallCard({ call }: CallProps) {
 
         {call.faqs.length > 0 && (
           <>
-            <Typography variant="h5">FAQs:</Typography>
+            <Typography variant="body1">FAQs:</Typography>
             <List>
               {call.faqs.map((faq) => (
                 <ListItem key={faq.id}>
