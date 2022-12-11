@@ -14,6 +14,7 @@ interface RouteConfig {
   Icon: React.ComponentType;
   Component: React.ComponentType;
   exact?: boolean;
+  divide?: boolean;
 }
 
 export const routes: RouteConfig[] = [
@@ -22,17 +23,19 @@ export const routes: RouteConfig[] = [
     label: 'Dashboard',
     Icon: DashboardIcon,
     Component: Dashboard,
+    divide: true,
   },
   {
     path: 'history',
-    label: 'History',
+    label: 'Call History',
     Icon: HistoryIcon,
     Component: History,
   },
   {
     path: 'live-calls',
-    label: 'Live Calls',
+    label: 'Available Calls',
     Icon: PhoneForwardedIcon,
     Component: LiveCalls,
+    divide: true,
   },
 ];
