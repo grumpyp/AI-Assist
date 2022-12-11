@@ -50,6 +50,7 @@ def insert_sample_data():
                 recording=b"binary_recording_data",
                 transcription="Transcription of the recording.",
                 summary="Summary of the recording",
+                url="https://hackathon.content-baer.de/examplecall2.m4a"
             )
         ],
         language="English",
@@ -135,7 +136,7 @@ def patrick():
                 problems=[Problem(type=None, long_description=process_call.get('text'), category=None)],
                 solutions=Solution.query.filter_by(summary=f'%{process_call.get("summary")}%').all(),
                 recordings=[Recording(duration=process_call.get('audio_duration'), recording=audio_data,
-                call_id=process_call.get('call_id'))], language=process_call.get('language_code'),
+                call_id=process_call.get('call_id'), url=file)], language=process_call.get('language_code'),
                 callback_requested=process_call.get('callback_requested'), transfer_requested=False,
                 voicemail_left=False, transcript_requested=False, status="in progress", faqs=process_call.get('faqs'),)
     db.session.add(call)
