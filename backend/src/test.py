@@ -8,6 +8,7 @@ from database.models.employees.team import Team, TeamPerformanceMetrics
 from database.models.employees.worker import Worker, WorkerPerformanceMetrics
 from database.models.queueing_theory_model import QueueingTheoryModel, QueueingTheoryBestMatch
 from database.models.faq import Faq
+import os
 
 
 def insert_sample_data():
@@ -173,6 +174,10 @@ def insert_sample_data():
 def patrick():
     from processing.assemblyAI.fileupload import upload_file
     from processing.assemblyAI.summarize import AssemblyAI
+    script_dir = os.path.dirname(__file__)
+    rel_path = "examplecall3.m4a"
+    abs_file_path = os.path.join(script_dir, rel_path)
+    print(abs_file_path)
     filepath = "/Users/patrickgerard/Documents/Programmierung/-50k-AI-Hackathon/backend/src/examplecall3.m4a"
     file = upload_file("/Users/patrickgerard/Documents/Programmierung/-50k-AI-Hackathon/backend/src/example.m4a")
     with open(filepath, 'rb') as f:
