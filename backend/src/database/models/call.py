@@ -8,7 +8,7 @@ from database.models.employees.employee import employee_call
 class Call(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     customer_id = db.Column(db.String(36), db.ForeignKey("customer.id"))
-    customer = db.relationship("Customer", lazy=True, viewonly=False)
+    customer = db.relationship("Customer", lazy=False, viewonly=False)
     problems = db.relationship("Problem", lazy=False)
     solutions = db.relationship("Solution", lazy=False)
     recordings = db.relationship("Recording", lazy=False)
@@ -24,7 +24,6 @@ class Call(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
     faqs = db.relationship("Faq", lazy=False)
-    #TODO: add to_dict to all other models e.g. Problems, Faqs,..
     def to_dict(self):
         call_dict = {}
         for attr in self.__dict__:
@@ -37,10 +36,16 @@ class Call(db.Model):
                     faqs.append(faq.to_dict())
                 call_dict["faqs"] = faqs
             if attr == "customer":
-                customer = []
-                for cus in self.customer:
-                    customer.append(cus.to_dict())
-                call_dict["customer"] = customer
+                customers = {}
+                for customer in self.customer.__dict__.items():
+                    try:
+                        if customer[0] == "name" or customer[0] == "contact_info" or customer[0] == "satistfaction_rating"\
+                                or customer[0] == "id" or customer[0] == "account_number" or customer[0] == "preferences"\
+                                or customer[0] == "location":
+                            customers[customer[0]] = customer[1]
+                    except Exception:
+                        pass
+                call_dict["customer"] = customers
             if attr == "problems":
                 problems = []
                 for prob in self.problems:

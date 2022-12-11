@@ -19,6 +19,8 @@ class Customer(db.Model):
     def to_dict(self):
         call_dict = {}
         for attr in self.__dict__:
-            if not attr.startswith("_"):
+            if not attr.startswith("_") and attr != "calls":
                 call_dict[attr] = getattr(self, attr)
+            elif attr == "calls":
+                continue
         return call_dict
