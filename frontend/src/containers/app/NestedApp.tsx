@@ -37,7 +37,7 @@ export function NestedApp({ appPath }: { appPath: string }) {
         },
         {
           label: 'Logout',
-          path: getPath('logout'),
+          path: getPath('/'),
           icon: <LogoutIcon />,
           onClick: () => logoutUser(),
           bottom: true,
